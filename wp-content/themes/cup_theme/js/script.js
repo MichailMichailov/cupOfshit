@@ -332,12 +332,12 @@ function setupDateAndFilters() {
     var yyyy = today.getFullYear();
     var currentDate = yyyy + '-' + mm + '-' + dd;
 
-    document.getElementById('search_date').value = currentDate;
+    document.getElementById('dateRangeInput').value = currentDate;//search_date
 
     filterAndSearch();
 
     // Добавляем обработчики событий для изменения каждого поля ввода
-    document.getElementById('search_date').addEventListener('change', filterAndSearch);
+    document.getElementById('dateRangeInput').addEventListener('change', filterAndSearch);//search_date
     document.getElementById('searchStatus').addEventListener('input', filterAndSearch);
     document.getElementById('searchAction').addEventListener('input', filterAndSearch);
     document.getElementById('searchName').addEventListener('input', filterAndSearch);
@@ -350,7 +350,9 @@ function setupDateAndFilters() {
 
 // Функция для фильтрации элементов по выбранной дате и поиску значений
 function filterAndSearch() {
-    var selectedDate = document.getElementById('search_date').value;
+    var selectedDate = document.getElementById('dateRangeInput').value;//search_date
+    var [startDate, endDate] = selectedDate.split(" - ");
+    endDate = endDate===undefined?startDate:endDate;
     var searchStatus = document.getElementById('searchStatus').value.trim().toLowerCase();
     var searchAction = document.getElementById('searchAction').value.trim().toLowerCase();
     var searchName = document.getElementById('searchName').value.trim().toLowerCase();
@@ -359,7 +361,6 @@ function filterAndSearch() {
     var searchTime = document.getElementById('searchTime').value.trim().toLowerCase();
 
     var listItems = document.querySelectorAll('#id_report_post .id_report_post_item');
-
     listItems.forEach(function(item) {
         var itemDate = item.querySelector('.id_report_post_item_time').getAttribute('data-date');
         var statusValue = item.querySelector('.id_report_post_item_status').textContent.trim().toLowerCase();
@@ -372,7 +373,9 @@ function filterAndSearch() {
         var listItem = item.closest('.id_report_post_item');
 
         // Проверяем совпадение даты
-        var dateMatch = (itemDate === selectedDate || selectedDate === '');
+        var dateMatch = (selectedDate === '' || (new Date(itemDate) >= new Date(startDate) 
+                                             && new Date(itemDate) <= new Date(endDate)));
+
 
         // Проверяем совпадение поисковых текстов
         var statusMatch = (statusValue.includes(searchStatus) || searchStatus === '');
@@ -516,7 +519,7 @@ function exportAndDownloadExcel() {
     });
 
     // Формируем имя файла из слова "Звіт" и выбранной даты, если дата выбрана
-    var selectedDate = document.getElementById('search_date').value;
+    var selectedDate = document.getElementById('dateRangeInput').value;//search_date
     var fileName = selectedDate ? 'Звіт_' + selectedDate + '.xlsx' : 'report.xlsx';
 
     // Создаем новую книгу Excel

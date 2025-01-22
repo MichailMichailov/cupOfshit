@@ -1687,7 +1687,7 @@ get_header();
             <div class="calendar-grid" id="calendarGrid"></div>
             </div>
         </div>
-        <input id="search_date" type="date" name="дата">
+        <!-- <input id="search_date" type="date" name="дата"> -->
     </div>
     <!--Фильтры поиска-->
     <div id="id_report_filter" class="w f gap2 f_f _b_b _b_t pad2">
@@ -1781,6 +1781,11 @@ get_header();
     <div id="excelForm">
         <div class="w f _f_ fac">
             <button id="exportToExcel" class="btn shadow f _f_ fac" type="submit" onclick="exportAndDownloadExcel()">
+                <img class="h_50m" src="<?php echo get_template_directory_uri(); ?>/img/excel.png" alt="excel">
+            </button>
+        </div>
+        <div class="w f _f_ fac">
+            <button id="exportToExcelAll" class="btn shadow f _f_ fac" type="submit" onclick="exportAndDownloadExcelAll()">
                 <img class="h_50m" src="<?php echo get_template_directory_uri(); ?>/img/excel.png" alt="excel">
             </button>
         </div>

@@ -44,7 +44,7 @@ function exportAndDownloadExcel() {
     });
 
     // Формируем имя файла из слова "Звіт" и выбранной даты, если дата выбрана
-    var selectedDate = document.getElementById('search_date').value;
+    var selectedDate = document.getElementById('dateRangeInput').value; //search_date
     var fileName = selectedDate ? 'Звіт_' + selectedDate + '.xlsx' : 'report.xlsx';
 
     // Создаем новую книгу Excel
@@ -73,10 +73,10 @@ function executeAtSpecificTime(hour, minute) {
 
 // Устанавливаем интервал проверки времени каждую минуту
 setInterval(function() {
-    executeAtSpecificTime(12, 00);
-    executeAtSpecificTime(14, 00);
-    executeAtSpecificTime(16, 00);
-    executeAtSpecificTime(18, 00);
-    executeAtSpecificTime(20, 00);
+    executeAtSpecificTime(12, 0);
+    executeAtSpecificTime(14, 0);
+    executeAtSpecificTime(16, 0);
+    executeAtSpecificTime(18, 0);
+    executeAtSpecificTime(20, 0);
 }, 60000); // 60000 миллисекунд = 1 минута
 exportAndDownloadExcel();

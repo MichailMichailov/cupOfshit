@@ -5,6 +5,7 @@
 
 .calendar-container {
     position: absolute;
+    left: -5%;
     width: 320px;
     margin: 20px auto;
     border: 1px solid #ddd;
@@ -80,4 +81,37 @@
     border-radius: 4px;
     text-align: center;
     cursor: pointer;
+}
+
+
+@media (max-width: 500px) {
+    .calendar-container {
+        width: 100%;
+        margin: 10px;
+    }
+
+    .calendar-header {
+        padding: 6px 8px;
+    }
+
+    .calendar-header span {
+        font-size: 12px;
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(7, 1fr); 
+    }
+
+    .date-cell {
+        font-size: 12px; 
+        height: 30px;
+    }
+
+    .day-name {
+        font-size: 10px; 
+    }
+
+    #dateRangeInput {
+        font-size: 12px;
+    }
 }
