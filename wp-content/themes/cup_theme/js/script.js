@@ -474,9 +474,12 @@ function addNumber(fieldName, counterName) {
 
 
 // Функция для формирования и скачивания файла Excel
-function exportAndDownloadExcel() {
+function exportAndDownloadExcel(flag) {
     // Получаем отфильтрованные элементы таблицы
-    var filteredItems = document.querySelectorAll('#id_report_post .id_report_post_item[style*="display: flex"]');
+    var filteredItems = flag ? 
+            document.querySelectorAll('#id_report_post .id_report_post_item[style*="display: flex"]'):
+            document.querySelectorAll('#id_report_post .id_report_post_item');
+            
     var sheetData = [];
     var headers = ['Статус','Дія', 'Найменування', 'К-сть', 'Фахівець', 'Час'];
 
@@ -520,7 +523,7 @@ function exportAndDownloadExcel() {
 
     // Формируем имя файла из слова "Звіт" и выбранной даты, если дата выбрана
     var selectedDate = document.getElementById('dateRangeInput').value;//search_date
-    var fileName = selectedDate ? 'Звіт_' + selectedDate + '.xlsx' : 'report.xlsx';
+    var fileName = selectedDate ? 'Звіт_' + selectedDate + (flag?'':'_all') +'.xlsx' : 'report.xlsx';
 
     // Создаем новую книгу Excel
     var workbook = XLSX.utils.book_new();
@@ -530,6 +533,7 @@ function exportAndDownloadExcel() {
     // Скачиваем файл Excel
     XLSX.writeFile(workbook, fileName);
 }
+
 
 // Устанавливаем интервал для вызова функции каждые 10 секунд (10000 миллисекунд)
 //setInterval(exportAndDownloadExcel, 10000);

@@ -1778,15 +1778,16 @@ get_header();
     ?>
     </ul>
     <!--excel-->
-    <div id="excelForm">
+    <div id="excelForm" class="downloadToExel">
         <div class="w f _f_ fac">
-            <button id="exportToExcel" class="btn shadow f _f_ fac" type="submit" onclick="exportAndDownloadExcel()">
+            <button id="exportToExcel" class="btn shadow f _f_ fac" type="submit" onclick="exportAndDownloadExcel(true)">
                 <img class="h_50m" src="<?php echo get_template_directory_uri(); ?>/img/excel.png" alt="excel">
             </button>
         </div>
         <div class="w f _f_ fac">
-            <button id="exportToExcelAll" class="btn shadow f _f_ fac" type="submit" onclick="exportAndDownloadExcelAll()">
+            <button id="exportToExcelAll" class="btn shadow f _f_ fac fack" type="submit" onclick="exportAndDownloadExcel(false)">
                 <img class="h_50m" src="<?php echo get_template_directory_uri(); ?>/img/excel.png" alt="excel">
+                <div class="">Скачать всё</div>
             </button>
         </div>
     </div>

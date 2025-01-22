@@ -83,6 +83,13 @@
     cursor: pointer;
 }
 
+.downloadToExel{
+    display: flex;
+}
+.fack{
+    display: flex;
+    flex-direction: column;
+}
 
 @media (max-width: 500px) {
     .calendar-container {
