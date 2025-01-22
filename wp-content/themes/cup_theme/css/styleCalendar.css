@@ -1,0 +1,83 @@
+.calendar__body {
+    position: relative;
+    display: inline-block;
+}
+
+.calendar-container {
+    position: absolute;
+    width: 320px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    background-color: white;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.calendar-header span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 10px;
+}
+
+.day-name,
+.date-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+}
+
+.day-name {
+    font-weight: bold;
+    color: #555;
+}
+
+.date-cell {
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.date-cell:hover {
+    background-color: #f1f1f1;
+}
+
+.date-cell.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+.date-cell.range {
+    background-color: #cce5ff;
+}
+
+#dateRangeInput {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}

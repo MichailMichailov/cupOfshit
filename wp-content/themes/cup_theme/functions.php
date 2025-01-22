@@ -143,12 +143,13 @@ function cup_theme_scripts() {
 
     // Подключение стилей из вашего тематического каталога
     wp_enqueue_style( 'cup_theme-custom-style', get_template_directory_uri() . '/style.css', array('cup_theme-style'), _S_VERSION );
-
-    // Подключение скрипта ajax.js
+	wp_enqueue_style( 'cup_theme-style-сalendar', get_template_directory_uri() . '/css/styleCalendar.css', array('cup_theme-style'), _S_VERSION );
+    
+	// Подключение скрипта ajax.js
     wp_enqueue_script( 'cup_theme-ajax', get_template_directory_uri() . '/js/ajax.js', array('jquery'), _S_VERSION, true );
-
     // Подключение скрипта my_script.js
     wp_enqueue_script( 'cup_theme-script', get_template_directory_uri() . '/js/script.js', array('jquery'), _S_VERSION, true );
+	wp_enqueue_script( 'cup_theme-script-сalendar', get_template_directory_uri() . '/js/scriptCalendar.js', array('jquery'), _S_VERSION, true );
 
     wp_enqueue_script( 'xlsx', 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js', array(), null, true );
 }

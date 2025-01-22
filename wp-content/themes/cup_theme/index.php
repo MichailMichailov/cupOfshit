@@ -1676,6 +1676,17 @@ get_header();
 <section id="tab_6" class="tabs__block f fc gap60">
     <!--Дата-->
     <div class="f w _f fac pad8t pad8b">
+        <div class="calendar__body">
+            <input type="text" id="dateRangeInput" readonly placeholder="Выберите диапазон">
+            <div class="calendar-container" id="calendarContainer" style="display: none;">
+            <div class="calendar-header">
+                <button id="prevMonth">&lt;</button>
+                <span id="currentMonth"></span>
+                <button id="nextMonth">&gt;</button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+        </div>
         <input id="search_date" type="date" name="дата">
     </div>
     <!--Фильтры поиска-->
