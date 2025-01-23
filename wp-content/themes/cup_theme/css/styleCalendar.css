@@ -86,10 +86,11 @@
 .downloadToExel{
     display: flex;
 }
-.fack{
+.flex_col{
     display: flex;
     flex-direction: column;
 }
+
 
 @media (max-width: 500px) {
     .calendar-container {

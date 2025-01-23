@@ -1759,10 +1759,17 @@ get_header();
                 <?php echo $tab_6_item['tab_6_master']; ?>
                 <?php endif; ?>
             </div>
-            <div class="id_report_post_item_time pad2 _b_l _b_r id_report_post_column f fac" data-date="<?php if(isset($tab_6_item['tab_6_date'])): ?><?php echo $tab_6_item['tab_6_date']; ?><?php endif; ?>">
-                <?php if(isset($tab_6_item['tab_6_time'])): ?>
-                <?php echo $tab_6_item['tab_6_time']; ?>
-                <?php endif; ?>
+            <div class="id_report_post_item_time pad2 _b_l _b_r id_report_post_column f fac flex_col" data-date="<?php if(isset($tab_6_item['tab_6_date'])): ?><?php echo $tab_6_item['tab_6_date']; ?><?php endif; ?>">
+                <div class="">
+                    <?php if(isset($tab_6_item['tab_6_time'])): ?>
+                    <?php echo $tab_6_item['tab_6_time']; ?>
+                    <?php endif; ?>
+                </div>
+                <div class="">
+                    <?php if(isset($tab_6_item['tab_6_date'])): ?>
+                    <?php echo $tab_6_item['tab_6_date']; ?>
+                    <?php endif; ?>
+                </div>
             </div>
         </li>
         <?php
@@ -1780,14 +1787,20 @@ get_header();
     <!--excel-->
     <div id="excelForm" class="downloadToExel">
         <div class="w f _f_ fac">
-            <button id="exportToExcel" class="btn shadow f _f_ fac" type="submit" onclick="exportAndDownloadExcel(true)">
+            <button id="exportToExcel" class="btn shadow f _f_ fac" type="submit" onclick="exportAndDownloadExcel(0)">
                 <img class="h_50m" src="<?php echo get_template_directory_uri(); ?>/img/excel.png" alt="excel">
             </button>
         </div>
         <div class="w f _f_ fac">
-            <button id="exportToExcelAll" class="btn shadow f _f_ fac fack" type="submit" onclick="exportAndDownloadExcel(false)">
+            <button id="exportToExcelAll" class="btn shadow f _f_ fac flex_col" type="submit" onclick="exportAndDownloadExcel(1)">
                 <img class="h_50m" src="<?php echo get_template_directory_uri(); ?>/img/excel.png" alt="excel">
                 <div class="">Скачать всё</div>
+            </button>
+        </div>
+        <div class="w f _f_ fac">
+            <button id="exportToExcelAll" class="btn shadow f _f_ fac flex_col" type="submit" onclick="exportAndDownloadExcel(2)">
+                <img class="h_50m" src="<?php echo get_template_directory_uri(); ?>/img/excel.png" alt="excel">
+                <div class="">Наличие</div>
             </button>
         </div>
     </div>

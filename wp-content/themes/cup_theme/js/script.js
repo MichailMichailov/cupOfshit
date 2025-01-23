@@ -476,7 +476,7 @@ function addNumber(fieldName, counterName) {
 // Функция для формирования и скачивания файла Excel
 function exportAndDownloadExcel(flag) {
     // Получаем отфильтрованные элементы таблицы
-    var filteredItems = flag ? 
+    var filteredItems = flag===0 ? 
             document.querySelectorAll('#id_report_post .id_report_post_item[style*="display: flex"]'):
             document.querySelectorAll('#id_report_post .id_report_post_item');
             
@@ -493,6 +493,12 @@ function exportAndDownloadExcel(flag) {
         var status = item.querySelector('.id_report_post_item_status').textContent.trim();
         var action = item.querySelector('.id_report_post_item_action').textContent.trim();
         var nameItems = item.querySelectorAll('.id_report_post_item_name__item');
+        var slc = String(status).toLowerCase()
+        var nlc = String(nameItems).toLowerCase()
+        if((flag === 2) && !(slc.includes('поклейка') || slc.includes('напівфабрикат') 
+                            || nlc.includes('скло') || nlc.includes('вставка')) ){
+            return
+        }
         var count = item.querySelector('.id_report_post_item_count').textContent.trim();
         var master = item.querySelector('.id_report_post_item_master').textContent.trim();
         var time = item.querySelector('.id_report_post_item_time').textContent.trim();
@@ -515,7 +521,6 @@ function exportAndDownloadExcel(flag) {
                 nameData += '\n';
             }
         });
-
         // Формируем строку данных для текущего элемента
         var rowData = [status, action, nameData, count, master, time];
         sheetData.push(rowData);
@@ -523,7 +528,7 @@ function exportAndDownloadExcel(flag) {
 
     // Формируем имя файла из слова "Звіт" и выбранной даты, если дата выбрана
     var selectedDate = document.getElementById('dateRangeInput').value;//search_date
-    var fileName = selectedDate ? 'Звіт_' + selectedDate + (flag?'':'_all') +'.xlsx' : 'report.xlsx';
+    var fileName = selectedDate ? 'Звіт_' + selectedDate + (flag===0?'':flag===1?'_all':'_availability') +'.xlsx' : 'report.xlsx';
 
     // Создаем новую книгу Excel
     var workbook = XLSX.utils.book_new();
