@@ -380,7 +380,7 @@ input[type="text"]:focus {
 .filter_name,.id_report_post_item_name {
     flex: 1 1 200px;
     word-break: break-word;
-    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
 .filter_count,.id_report_post_item_count {
     flex: 1 1 100px;

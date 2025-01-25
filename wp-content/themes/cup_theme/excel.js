@@ -1,6 +1,5 @@
 // Функция для формирования и скачивания файла Excel
 function exportAndDownloadExcel() {
-    alert('ff')
     // Получаем отфильтрованные элементы таблицы
     var filteredItems = document.querySelectorAll('#id_report_post .id_report_post_item[style*="display: flex"]');
     var sheetData = [];

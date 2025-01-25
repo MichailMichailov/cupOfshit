@@ -1797,8 +1797,22 @@ get_header();
                 <div class="">Скачать всё</div>
             </button>
         </div>
+        <?php
+            $steclo_list = CFS()->get('glass_list');
+            $vstavka_list = CFS()->get('stick_list');   
+            $polufab_list = CFS()->get('tab_3_list'); 
+            $poclei_list = CFS()->get('tab_4_list'); 
+            $gotov_list = CFS()->get('tab_5_list');
+        ?>
+        <script>
+            let glassList = <?php echo json_encode($steclo_list); ?>;
+            let vstavkaList = <?php echo json_encode($vstavka_list); ?>;
+            let polufabList = <?php echo json_encode($polufab_list); ?>;
+            let pocleiList = <?php echo json_encode($poclei_list); ?>;
+            let gotovList = <?php echo json_encode($gotov_list); ?>;
+        </script>
         <div class="w f _f_ fac">
-            <button id="exportToExcelAll" class="btn shadow f _f_ fac flex_col" type="submit" onclick="exportAndDownloadExcel(2)">
+            <button id="exportToExcelAll" class="btn shadow f _f_ fac flex_col" type="submit" onclick="exportAndDownloadExcelSort()">
                 <img class="h_50m" src="<?php echo get_template_directory_uri(); ?>/img/excel.png" alt="excel">
                 <div class="">Наличие</div>
             </button>

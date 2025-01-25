@@ -539,6 +539,45 @@ function exportAndDownloadExcel(flag) {
     XLSX.writeFile(workbook, fileName);
 }
 
+function exportAndDownloadExcelSort(){      
+    var sheetData = [];
+    var headers = ['Тип','Назва','К-сть'];
+    var reportTitle = ['Звіт_Наявність'];
+    var selectedDate = new Date().toLocaleDateString('uk-UA')
+    var currentDate = ['Дата: ' + selectedDate];
+    sheetData.push(reportTitle, currentDate, headers);
+    let type = 'скло'
+    Object.entries(glassList).forEach(([key, value]) => {
+        let result = [type, value['glass_name'], value['glass_count']]
+        sheetData.push(result);
+    });
+    type = 'вставка'
+    Object.entries(vstavkaList).forEach(([key, value]) => {
+        let result = [type, value['stick_name'], value['stick_count']]
+        sheetData.push(result);
+    });
+    type = 'напівфабрикат'
+    Object.entries(polufabList).forEach(([key, value]) => {
+        let result = [type, `${value['tab_3_glass']}_${value['tab_3_insert']}`, value['tab_3_count']]
+        sheetData.push(result);
+    });
+    type = 'поклейка'
+    Object.entries(pocleiList).forEach(([key, value]) => {
+        let result = [type, `${value['tab_4_glass']}_${value['tab_4_insert']}`, value['tab_4_count']]
+        sheetData.push(result);
+    });
+    type = 'готове'
+    Object.entries(gotovList).forEach(([key, value]) => {
+        let result = [type, `${value['tab_5_glass']}_${value['tab_5_insert']}`, value['tab_5_count']]
+        sheetData.push(result);
+    });
+    var fileName = selectedDate ? 'Звіт_' + selectedDate + '_availability' +'.xlsx' : 'report.xlsx';
+    var workbook = XLSX.utils.book_new();
+    var worksheet = XLSX.utils.aoa_to_sheet(sheetData);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Report');
+    XLSX.writeFile(workbook, fileName);
+}
+
 
 // Устанавливаем интервал для вызова функции каждые 10 секунд (10000 миллисекунд)
 //setInterval(exportAndDownloadExcel, 10000);
