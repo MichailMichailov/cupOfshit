@@ -547,30 +547,40 @@ function exportAndDownloadExcelSort(){
     var currentDate = ['Дата: ' + selectedDate];
     sheetData.push(reportTitle, currentDate, headers);
     let type = 'скло'
-    Object.entries(glassList).forEach(([key, value]) => {
-        let result = [type, value['glass_name'], value['glass_count']]
-        sheetData.push(result);
-    });
+    if(glassList){
+        Object.entries(glassList).forEach(([key, value]) => {
+            let result = [type, value['glass_name'], value['glass_count']]
+            sheetData.push(result);
+        });
+    }
     type = 'вставка'
-    Object.entries(vstavkaList).forEach(([key, value]) => {
-        let result = [type, value['stick_name'], value['stick_count']]
-        sheetData.push(result);
-    });
+    if(vstavkaList){
+        Object.entries(vstavkaList).forEach(([key, value]) => {
+            let result = [type, value['stick_name'], value['stick_count']]
+            sheetData.push(result);
+        });
+    }
     type = 'напівфабрикат'
-    Object.entries(polufabList).forEach(([key, value]) => {
-        let result = [type, `${value['tab_3_glass']}_${value['tab_3_insert']}`, value['tab_3_count']]
-        sheetData.push(result);
-    });
+    if(polufabList){
+        Object.entries(polufabList).forEach(([key, value]) => {
+            let result = [type, `${value['tab_3_glass']}_${value['tab_3_insert']}`, value['tab_3_count']]
+            sheetData.push(result);
+        });
+    }
     type = 'поклейка'
-    Object.entries(pocleiList).forEach(([key, value]) => {
-        let result = [type, `${value['tab_4_glass']}_${value['tab_4_insert']}`, value['tab_4_count']]
-        sheetData.push(result);
-    });
+    if(pocleiList){
+        Object.entries(pocleiList).forEach(([key, value]) => {
+            let result = [type, `${value['tab_4_glass']}_${value['tab_4_insert']}`, value['tab_4_count']]
+            sheetData.push(result);
+        });
+    }
     type = 'готове'
-    Object.entries(gotovList).forEach(([key, value]) => {
-        let result = [type, `${value['tab_5_glass']}_${value['tab_5_insert']}`, value['tab_5_count']]
-        sheetData.push(result);
-    });
+    if(gotovList){
+        Object.entries(gotovList).forEach(([key, value]) => {
+            let result = [type, `${value['tab_5_glass']}_${value['tab_5_insert']}`, value['tab_5_count']]
+            sheetData.push(result);
+        });
+    }
     var fileName = selectedDate ? 'Звіт_' + selectedDate + '_availability' +'.xlsx' : 'report.xlsx';
     var workbook = XLSX.utils.book_new();
     var worksheet = XLSX.utils.aoa_to_sheet(sheetData);
