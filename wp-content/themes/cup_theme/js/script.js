@@ -615,9 +615,6 @@ function exportAndDownloadExcelSort(){
 //exportAndDownloadExcel();
 
 
-
-
-
 // Функция для обновления информации о количестве выбранных вставок
 function updateSelectedCount(inputId, dataListId) {
     var input = document.getElementById(inputId);
@@ -649,3 +646,66 @@ document.getElementById('tab_3_stick_2_selected').addEventListener('input', func
 document.getElementById('tab_3_stick_3_selected').addEventListener('input', function() {
     updateSelectedCount('tab_3_stick_3_selected', 'tab_3_stick_3');
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const items = document.querySelectorAll('.id_report_post_item');
+  
+    items.forEach(item => {
+      item.style.position = 'relative'; // Нужно для абсолютного позиционирования overlay
+  
+      item.addEventListener('mouseenter', () => {
+        const overlay = document.createElement('div');
+        overlay.classList.add('overlay-comment');
+        overlay.textContent = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.';
+        overlay.dataset.overlay = 'true'; // чтобы было проще находить
+  
+        item.appendChild(overlay);
+      });
+  
+      item.addEventListener('mouseleave', () => {
+        const overlay = item.querySelector('[data-overlay="true"]');
+        if (overlay) {
+          overlay.remove();
+        }
+      });
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const elements = document.querySelectorAll('.f.fac.gap8.list_item');
+  
+    elements.forEach(el => {
+      el.style.position = 'relative';
+  
+      el.addEventListener('mouseenter', () => {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip-comment';
+        tooltip.textContent = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.';
+        
+  
+        const isTopHalf = (rect.top + rect.bottom) / 2 < windowHeight / 2;
+        tooltip.classList.add(isTopHalf ? 'bottom' : 'top');
+        tooltip.dataset.tooltip = 'true';
+  
+        document.body.appendChild(tooltip);
+  
+        const tooltipHeight = tooltip.offsetHeight;
+        const tooltipWidth = tooltip.offsetWidth;
+  
+        const top = isTopHalf
+          ? rect.bottom + window.scrollY + 10
+          : rect.top + window.scrollY - tooltipHeight - 10;
+  
+        const left = rect.left + window.scrollX + (rect.width - tooltipWidth) / 2;
+  
+        tooltip.style.top = `${top}px`;
+        tooltip.style.left = `${left}px`;
+      });
+  
+      el.addEventListener('mouseleave', () => {
+        document.querySelectorAll('[data-tooltip="true"]').forEach(tip => tip.remove());
+      });
+    });
+  });

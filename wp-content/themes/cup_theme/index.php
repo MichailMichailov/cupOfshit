@@ -1,6 +1,7 @@
 <?php
+
 /**
-* Template Name: Index 1
+ * Template Name: Index 1
  */
 
 get_header();
@@ -15,39 +16,39 @@ get_header();
         <img class="tab_img" src="<?php echo get_template_directory_uri(); ?>/img/tab1.png" alt="">
     </button>
     <button id="tab_2_button" class="btn_tab pad8t pad8b" onclick="showTab('tab_2', this)">
-            <span class="tab_chapter">
-                Піч
-            </span>
+        <span class="tab_chapter">
+            Піч
+        </span>
         <img class="tab_img" src="<?php echo get_template_directory_uri(); ?>/img/tab2.png" alt="">
     </button>
     <button id="tab_3_button" class="btn_tab pad8t pad8b" onclick="showTab('tab_3', this)">
-            <span class="tab_chapter">
-                Напівфабрикат
-            </span>
+        <span class="tab_chapter">
+            Напівфабрикат
+        </span>
         <img class="tab_img" src="<?php echo get_template_directory_uri(); ?>/img/tab3.png" alt="">
     </button>
     <button id="tab_4_button" class="btn_tab pad8t pad8b" onclick="showTab('tab_4', this)">
-            <span class="tab_chapter">
-                Поклейка
-            </span>
+        <span class="tab_chapter">
+            Поклейка
+        </span>
         <img class="tab_img" src="<?php echo get_template_directory_uri(); ?>/img/tab4.png" alt="">
     </button>
     <button id="tab_5_button" class="btn_tab pad8t pad8b" onclick="showTab('tab_5', this)">
-            <span class="tab_chapter">
-                Готове
-            </span>
+        <span class="tab_chapter">
+            Готове
+        </span>
         <img class="tab_img" src="<?php echo get_template_directory_uri(); ?>/img/tab5.png" alt="">
     </button>
     <button id="tab_6_button" class="btn_tab pad8t pad8b" onclick="showTab('tab_6', this)">
-            <span class="tab_chapter">
-                Звіт
-            </span>
+        <span class="tab_chapter">
+            Звіт
+        </span>
         <img class="tab_img" src="<?php echo get_template_directory_uri(); ?>/img/tab6.png" alt="">
     </button>
     <button id="tab_7_button" class="btn_tab pad8t pad8b" onclick="showTab('tab_7', this)">
-            <span class="tab_chapter">
-                Редагування
-            </span>
+        <span class="tab_chapter">
+            Редагування
+        </span>
         <img class="tab_img" src="<?php echo get_template_directory_uri(); ?>/img/tab7.png" alt="">
     </button>
 </section>
@@ -66,25 +67,25 @@ get_header();
                 Скло
             </div>
             <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_1_glass" list="tab_1_glass" id="tab_1_glass_selected" placeholder="Оберіть скло" class="shadow pad8" required/>
+                <input type="text" autocomplete="off" name="tab_1_glass" list="tab_1_glass" id="tab_1_glass_selected" placeholder="Оберіть скло" class="shadow pad8" required />
                 <datalist id="tab_1_glass" class="shadow">
                     <?php
                     $glass_list = CFS()->get('glass_list');
 
                     // Функция для сортировки массива по значению glass_count
-                    usort($glass_list, function($a, $b) {
-                    return $a['glass_count'] - $b['glass_count'];
+                    usort($glass_list, function ($a, $b) {
+                        return $a['glass_count'] - $b['glass_count'];
                     });
 
                     foreach ($glass_list as $index => $glass_item) {
                     ?>
-                    <option
+                        <option
                             data-name="<?php echo $glass_item['glass_name']; ?>"
                             data-id="<?php echo $index + 1; ?>"
                             data-count="<?php echo $glass_item['glass_count']; ?>"
                             value="<?php echo $glass_item['glass_name']; ?>">
-                        <?php echo $glass_item['glass_count']; ?>
-                    </option>
+                            <?php echo $glass_item['glass_count']; ?>
+                        </option>
                     <?php
                     }
                     ?>
@@ -97,7 +98,7 @@ get_header();
                 К-сть
             </div>
             <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                <input type="number" name="tab_1_count" id="tab_1_count" max="" required/>
+                <input type="number" name="tab_1_count" id="tab_1_count" max="" required />
             </div>
         </div>
         <!--Виемка-->
@@ -106,25 +107,26 @@ get_header();
                 Виїмка
             </div>
             <div class="w f fc">
-                <input autocomplete="off" type="text" name="tab_1_insert" list="tab_1_insert" id="tab_1_insert_selected" placeholder="Оберіть виїмку" class="shadow pad8"/>
+                <input autocomplete="off" type="text" name="tab_1_insert" list="tab_1_insert" id="tab_1_insert_selected" placeholder="Оберіть виїмку" class="shadow pad8" />
                 <datalist id="tab_1_insert" class="shadow">
                     <?php
                     $insert_list = CFS()->get('insert_list');
 
                     // Функция для сравнения строк по алфавиту с учетом кириллицы и английского
-                    function compare_inserts($a, $b) {
-                    $a_name = $a['insert_name'];
-                    $b_name = $b['insert_name'];
+                    function compare_inserts($a, $b)
+                    {
+                        $a_name = $a['insert_name'];
+                        $b_name = $b['insert_name'];
 
-                    // Сначала проверяем сортировку по кириллице
-                    $result = strcoll($a_name, $b_name);
+                        // Сначала проверяем сортировку по кириллице
+                        $result = strcoll($a_name, $b_name);
 
-                    // Если строки равны по кириллице, используем сортировку по английскому
-                    if ($result === 0) {
-                    return strcmp($a_name, $b_name);
-                    }
+                        // Если строки равны по кириллице, используем сортировку по английскому
+                        if ($result === 0) {
+                            return strcmp($a_name, $b_name);
+                        }
 
-                    return $result;
+                        return $result;
                     }
 
                     // Сортируем массив в соответствии с пользовательской функцией сравнения
@@ -132,7 +134,7 @@ get_header();
 
                     foreach ($insert_list as $index => $insert_item) {
                     ?>
-                    <option data-name="<?php echo $insert_item['insert_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $insert_item['insert_name']; ?>"></option>
+                        <option data-name="<?php echo $insert_item['insert_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $insert_item['insert_name']; ?>"></option>
                     <?php
                     }
                     ?>
@@ -145,25 +147,26 @@ get_header();
                 Працівник
             </div>
             <div class="w f fc">
-                <input autocomplete="off" type="text" name="tab_1_master" list="tab_1_master" id="tab_1_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
+                <input autocomplete="off" type="text" name="tab_1_master" list="tab_1_master" id="tab_1_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
                 <datalist id="tab_1_master" class="shadow">
                     <?php
-                        $master_list_tab_1 = CFS()->get('master_list');
+                    $master_list_tab_1 = CFS()->get('master_list');
 
                     // Функция сравнения для блока tab_1_master
-                    function compare_masters_tab_1($a, $b) {
-                    $a_name = $a['master_name'];
-                    $b_name = $b['master_name'];
+                    function compare_masters_tab_1($a, $b)
+                    {
+                        $a_name = $a['master_name'];
+                        $b_name = $b['master_name'];
 
-                    // Сначала проверяем сортировку по кириллице
-                    $result = strcoll($a_name, $b_name);
+                        // Сначала проверяем сортировку по кириллице
+                        $result = strcoll($a_name, $b_name);
 
-                    // Если строки равны по кириллице, используем сортировку по английскому
-                    if ($result === 0) {
-                    return strcmp($a_name, $b_name);
-                    }
+                        // Если строки равны по кириллице, используем сортировку по английскому
+                        if ($result === 0) {
+                            return strcmp($a_name, $b_name);
+                        }
 
-                    return $result;
+                        return $result;
                     }
 
                     // Сортировка массива для блока tab_1_master
@@ -171,10 +174,10 @@ get_header();
 
                     foreach ($master_list_tab_1 as $index => $master_item) {
                     ?>
-                    <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
+                        <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
                     <?php
-                        }
-                        ?>
+                    }
+                    ?>
                 </datalist>
             </div>
         </div>
@@ -281,29 +284,29 @@ get_header();
                 $glass_list = CFS()->get('glass_list');
 
                 if (!empty($glass_list)) {
-                usort($glass_list, function($a, $b) {
-                return $a['glass_count'] - $b['glass_count'];
-                });
+                    usort($glass_list, function ($a, $b) {
+                        return $a['glass_count'] - $b['glass_count'];
+                    });
 
-                foreach ($glass_list as $index => $glass_item) {
+                    foreach ($glass_list as $index => $glass_item) {
                 ?>
-                <li class="f fac gap8 list_item" data-name="<?php echo $glass_item['glass_name']; ?>"
-                    data-id="<?php echo $index + 1; ?>" data-count="<?php echo $glass_item['glass_count']; ?>">
+                        <li class="f fac gap8 list_item" data-name="<?php echo $glass_item['glass_name']; ?>"
+                            data-id="<?php echo $index + 1; ?>" data-count="<?php echo $glass_item['glass_count']; ?>">
                             <span>
                                 <?php echo $glass_item['glass_count']; ?>
                             </span>
-                    <span class="c4">
+                            <span class="c4">
                                 <?php echo $glass_item['glass_name']; ?>
                             </span>
-                </li>
-                <?php
+                        </li>
+                    <?php
                     }
                 } else {
                     // Если список стекла пуст, выводим "Скла немає"
                     ?>
-                <li class="f fac gap8 list_item">
-                    <span>Скла немає</span>
-                </li>
+                    <li class="f fac gap8 list_item">
+                        <span>Скла немає</span>
+                    </li>
                 <?php
                 }
                 ?>
@@ -320,52 +323,53 @@ get_header();
 
                 // Проверяем, есть ли информация о вставках
                 if (!empty($insert_list)) {
-                // Определение пользовательской функции сравнения
-                function cmp($a, $b) {
-                // Проверяем, принадлежат ли оба значения кириллическому алфавиту
-                $isCyrillicA = preg_match('/\p{Cyrillic}/u', $a);
-                $isCyrillicB = preg_match('/\p{Cyrillic}/u', $b);
+                    // Определение пользовательской функции сравнения
+                    function cmp($a, $b)
+                    {
+                        // Проверяем, принадлежат ли оба значения кириллическому алфавиту
+                        $isCyrillicA = preg_match('/\p{Cyrillic}/u', $a);
+                        $isCyrillicB = preg_match('/\p{Cyrillic}/u', $b);
 
-                // Если оба значения кириллические, сравниваем их лексикографически
-                if ($isCyrillicA && $isCyrillicB) {
-                return strcoll($a, $b);
-                }
+                        // Если оба значения кириллические, сравниваем их лексикографически
+                        if ($isCyrillicA && $isCyrillicB) {
+                            return strcoll($a, $b);
+                        }
 
-                // Если только одно значение кириллическое, то кириллическое значение должно быть первым
-                if ($isCyrillicA) {
-                return -1;
-                }
-                if ($isCyrillicB) {
-                return 1;
-                }
+                        // Если только одно значение кириллическое, то кириллическое значение должно быть первым
+                        if ($isCyrillicA) {
+                            return -1;
+                        }
+                        if ($isCyrillicB) {
+                            return 1;
+                        }
 
-                // Если оба значения не кириллические, сравниваем их лексикографически
-                return strcoll($a, $b);
-                }
+                        // Если оба значения не кириллические, сравниваем их лексикографически
+                        return strcoll($a, $b);
+                    }
 
-                // Создаем массив для хранения только значений 'insert_name'
-                $names = array();
-                foreach ($insert_list as $index => $insert_item) {
-                $names[$index] = $insert_item['insert_name'];
-                }
+                    // Создаем массив для хранения только значений 'insert_name'
+                    $names = array();
+                    foreach ($insert_list as $index => $insert_item) {
+                        $names[$index] = $insert_item['insert_name'];
+                    }
 
-                // Сортируем массив с помощью пользовательской функции сравнения
-                usort($names, 'cmp');
+                    // Сортируем массив с помощью пользовательской функции сравнения
+                    usort($names, 'cmp');
 
-                // Выводим элементы списка в соответствии с отсортированным массивом
-                foreach ($names as $index => $name) {
+                    // Выводим элементы списка в соответствии с отсортированным массивом
+                    foreach ($names as $index => $name) {
                 ?>
-                <li class="f fac gap8 list_item c9" data-name="<?php echo $name; ?>" data-id="<?php echo $index + 1; ?>">
-                    <?php echo $name; ?>
-                </li>
-                <?php
+                        <li class="f fac gap8 list_item c9" data-name="<?php echo $name; ?>" data-id="<?php echo $index + 1; ?>">
+                            <?php echo $name; ?>
+                        </li>
+                    <?php
                     }
                 } else {
                     // Если информация о вставках отсутствует, вы можете вывести сообщение об отсутствии данных
                     ?>
-                <li class="f fac gap8 list_item c9">
-                    Виїмок немає
-                </li>
+                    <li class="f fac gap8 list_item c9">
+                        Виїмок немає
+                    </li>
                 <?php
                 }
                 ?>
@@ -382,27 +386,27 @@ get_header();
 
                 // Проверяем наличие вставок в списке
                 if (!empty($stick_list)) {
-                // Сортируем список по количеству вставок
-                usort($stick_list, function ($a, $b) {
-                return $a['stick_count'] - $b['stick_count'];
-                });
-                // Выводим список вставок
-                foreach ($stick_list as $index => $stick_item) {
+                    // Сортируем список по количеству вставок
+                    usort($stick_list, function ($a, $b) {
+                        return $a['stick_count'] - $b['stick_count'];
+                    });
+                    // Выводим список вставок
+                    foreach ($stick_list as $index => $stick_item) {
                 ?>
-                <li class="f fac gap8 list_item" data-name="<?php echo $stick_item['stick_name']; ?>"
-                    data-id="<?php echo $index + 1; ?>" data-count="<?php echo $stick_item['stick_count']; ?>">
-                        <span>
-                            <?php echo $stick_item['stick_count']; ?>
-                        </span>
-                    <span class="c10">
-                            <?php echo $stick_item['stick_name']; ?>
-                        </span>
-                </li>
-                <?php
+                        <li class="f fac gap8 list_item" data-name="<?php echo $stick_item['stick_name']; ?>"
+                            data-id="<?php echo $index + 1; ?>" data-count="<?php echo $stick_item['stick_count']; ?>">
+                            <span>
+                                <?php echo $stick_item['stick_count']; ?>
+                            </span>
+                            <span class="c10">
+                                <?php echo $stick_item['stick_name']; ?>
+                            </span>
+                        </li>
+                    <?php
                     }
                 } else {
-                ?>
-                <li class="f fac gap8 list_item">Вставок немає</li>
+                    ?>
+                    <li class="f fac gap8 list_item">Вставок немає</li>
                 <?php
                 }
                 ?>
@@ -421,23 +425,23 @@ get_header();
                 Скло
             </div>
             <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_2_glass" list="tab_2_glass" id="tab_2_glass_selected" placeholder="Оберіть скло" class="shadow pad8" required/>
+                <input type="text" autocomplete="off" name="tab_2_glass" list="tab_2_glass" id="tab_2_glass_selected" placeholder="Оберіть скло" class="shadow pad8" required />
                 <datalist id="tab_2_glass" class="shadow">
                     <?php
                     $tab_2_list = CFS()->get('tab_2_list');
 
-                    usort($tab_2_list, function($a, $b) {
-                    return $a['tab_2_count'] - $b['tab_2_count'];
+                    usort($tab_2_list, function ($a, $b) {
+                        return $a['tab_2_count'] - $b['tab_2_count'];
                     });
 
                     foreach ($tab_2_list as $index => $tab_2_item) {
                     ?>
-                    <option data-name="<?php echo $tab_2_item['tab_2_glass']; ?> <?php echo $tab_2_item['tab_2_insert']; ?>"
+                        <option data-name="<?php echo $tab_2_item['tab_2_glass']; ?> <?php echo $tab_2_item['tab_2_insert']; ?>"
                             data-id="<?php echo $index + 1; ?>"
                             data-count="<?php echo $tab_2_item['tab_2_count']; ?>"
                             value="<?php echo $tab_2_item['tab_2_glass'] . ($tab_2_item['tab_2_insert'] ? ' ( ' . $tab_2_item['tab_2_insert'] . ' )' : ''); ?>">
-                        <?php echo $tab_2_item['tab_2_count']; ?>
-                    </option>
+                            <?php echo $tab_2_item['tab_2_count']; ?>
+                        </option>
                     <?php
                     }
                     ?>
@@ -450,7 +454,7 @@ get_header();
                 К-сть
             </div>
             <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                <input type="number" name="tab_2_count" id="tab_2_count" required/>
+                <input type="number" name="tab_2_count" id="tab_2_count" required />
             </div>
         </div>
         <!--Специалист-->
@@ -459,25 +463,26 @@ get_header();
                 Працівник
             </div>
             <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_2_master" list="tab_2_master" id="tab_2_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
+                <input type="text" autocomplete="off" name="tab_2_master" list="tab_2_master" id="tab_2_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
                 <datalist id="tab_2_master" class="shadow">
                     <?php
-                        $master_list_tab_2 = CFS()->get('master_list');
+                    $master_list_tab_2 = CFS()->get('master_list');
 
                     // Функция сравнения для блока tab_1_master
-                    function compare_masters_tab_2($a, $b) {
-                    $a_name = $a['master_name'];
-                    $b_name = $b['master_name'];
+                    function compare_masters_tab_2($a, $b)
+                    {
+                        $a_name = $a['master_name'];
+                        $b_name = $b['master_name'];
 
-                    // Сначала проверяем сортировку по кириллице
-                    $result = strcoll($a_name, $b_name);
+                        // Сначала проверяем сортировку по кириллице
+                        $result = strcoll($a_name, $b_name);
 
-                    // Если строки равны по кириллице, используем сортировку по английскому
-                    if ($result === 0) {
-                    return strcmp($a_name, $b_name);
-                    }
+                        // Если строки равны по кириллице, используем сортировку по английскому
+                        if ($result === 0) {
+                            return strcmp($a_name, $b_name);
+                        }
 
-                    return $result;
+                        return $result;
                     }
 
                     // Сортировка массива для блока tab_1_master
@@ -485,12 +490,12 @@ get_header();
 
                     foreach ($master_list_tab_2 as $index => $master_item) {
                     ?>
-                    <option data-name="<?php echo $master_item['master_name']; ?>"
+                        <option data-name="<?php echo $master_item['master_name']; ?>"
                             data-id="<?php echo $index + 1; ?>"
                             value="<?php echo $master_item['master_name']; ?>"></option>
                     <?php
-                        }
-                        ?>
+                    }
+                    ?>
                 </datalist>
             </div>
         </div>
@@ -540,7 +545,7 @@ get_header();
 
                 var enterCount = $('input[name="tab_2_count"]').val().trim();
 
-                if(!enterCount) {
+                if (!enterCount) {
                     alert('Оберіть кількість');
                     return false;
                 }
@@ -580,36 +585,36 @@ get_header();
 
                 // Проверяем наличие данных в списке
                 if (!empty($tab_2_list)) {
-                usort($tab_2_list, function($a, $b) {
-                return $a['tab_2_count'] - $b['tab_2_count'];
-                });
+                    usort($tab_2_list, function ($a, $b) {
+                        return $a['tab_2_count'] - $b['tab_2_count'];
+                    });
 
-                foreach ($tab_2_list as $index => $tab_2_item) {
+                    foreach ($tab_2_list as $index => $tab_2_item) {
                 ?>
-                <li class="f fac gap8 list_item"
-                    data-name="<?php echo $tab_2_item['tab_2_glass'] . ' ' . $tab_2_item['tab_2_insert']; ?>"
-                    data-id="<?php echo $index + 1; ?>"
-                    data-count="<?php echo $tab_2_item['tab_2_count']; ?>">
+                        <li class="f fac gap8 list_item"
+                            data-name="<?php echo $tab_2_item['tab_2_glass'] . ' ' . $tab_2_item['tab_2_insert']; ?>"
+                            data-id="<?php echo $index + 1; ?>"
+                            data-count="<?php echo $tab_2_item['tab_2_count']; ?>">
                             <span>
                                 <?php echo $tab_2_item['tab_2_count']; ?>
                             </span>
-                    <span class="c4">
+                            <span class="c4">
                                 <?php echo $tab_2_item['tab_2_glass']; ?>
                             </span>
-                    <span class="c9">
+                            <span class="c9">
                                 <?php if (isset($tab_2_item['tab_2_insert'])) {
                                     echo $tab_2_item['tab_2_insert'];
                                 } ?>
                             </span>
-                </li>
-                <?php
+                        </li>
+                    <?php
                     }
                 } else {
                     // Если список пуст, выводим соответствующее сообщение
                     ?>
-                <li class="f fac gap8 list_item">
-                    <span>Пусто</span>
-                </li>
+                    <li class="f fac gap8 list_item">
+                        <span>Пусто</span>
+                    </li>
                 <?php
                 }
                 ?>
@@ -626,23 +631,23 @@ get_header();
                 Посуд
             </div>
             <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_3_glass" list="tab_3_glass" id="tab_3_glass_selected" placeholder="Оберіть посуд" class="shadow pad8" required/>
+                <input type="text" autocomplete="off" name="tab_3_glass" list="tab_3_glass" id="tab_3_glass_selected" placeholder="Оберіть посуд" class="shadow pad8" required />
                 <datalist id="tab_3_glass" class="shadow">
                     <?php
                     $tab_3_list = CFS()->get('tab_3_list');
 
-                    usort($tab_3_list, function($a, $b) {
-                    return $a['tab_3_count'] - $b['tab_3_count'];
+                    usort($tab_3_list, function ($a, $b) {
+                        return $a['tab_3_count'] - $b['tab_3_count'];
                     });
 
                     foreach ($tab_3_list as $index => $tab_3_item) {
                     ?>
-                    <option data-glass="<?php echo $tab_3_item['tab_3_glass']; ?>"
+                        <option data-glass="<?php echo $tab_3_item['tab_3_glass']; ?>"
                             data-insert="<?php echo $tab_3_item['tab_3_insert']; ?>"
                             data-id="<?php echo $index + 1; ?>"
                             data-count="<?php echo $tab_3_item['tab_3_count']; ?>"
                             value="<?php echo $tab_3_item['tab_3_count'] . ' ' . $tab_3_item['tab_3_glass'] . ($tab_3_item['tab_3_insert'] ? ' ( ' . $tab_3_item['tab_3_insert'] . ' )' : ''); ?>">
-                    </option>
+                        </option>
                     <?php
                     }
                     ?>
@@ -655,7 +660,7 @@ get_header();
                 К-сть
             </div>
             <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                <input type="number" name="tab_3_count" id="tab_3_count" required/>
+                <input type="number" name="tab_3_count" id="tab_3_count" required />
             </div>
         </div>
         <!--Специалист-->
@@ -664,25 +669,26 @@ get_header();
                 Працівник
             </div>
             <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_3_master" list="tab_3_master" id="tab_3_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
+                <input type="text" autocomplete="off" name="tab_3_master" list="tab_3_master" id="tab_3_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
                 <datalist id="tab_3_master" class="shadow">
                     <?php
-                        $master_list_tab_3 = CFS()->get('master_list');
+                    $master_list_tab_3 = CFS()->get('master_list');
 
                     // Функция сравнения для блока tab_1_master
-                    function compare_masters_tab_3($a, $b) {
-                    $a_name = $a['master_name'];
-                    $b_name = $b['master_name'];
+                    function compare_masters_tab_3($a, $b)
+                    {
+                        $a_name = $a['master_name'];
+                        $b_name = $b['master_name'];
 
-                    // Сначала проверяем сортировку по кириллице
-                    $result = strcoll($a_name, $b_name);
+                        // Сначала проверяем сортировку по кириллице
+                        $result = strcoll($a_name, $b_name);
 
-                    // Если строки равны по кириллице, используем сортировку по английскому
-                    if ($result === 0) {
-                    return strcmp($a_name, $b_name);
-                    }
+                        // Если строки равны по кириллице, используем сортировку по английскому
+                        if ($result === 0) {
+                            return strcmp($a_name, $b_name);
+                        }
 
-                    return $result;
+                        return $result;
                     }
 
                     // Сортировка массива для блока tab_1_master
@@ -690,10 +696,10 @@ get_header();
 
                     foreach ($master_list_tab_3 as $index => $master_item) {
                     ?>
-                    <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
+                        <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
                     <?php
-                        }
-                        ?>
+                    }
+                    ?>
                 </datalist>
             </div>
         </div>
@@ -707,23 +713,23 @@ get_header();
                             Вставка 1
                         </div>
                         <div class="w f fc">
-                            <input type="text" autocomplete="off" name="tab_3_stick_1" list="tab_3_stick_1" id="tab_3_stick_1_selected" placeholder="Оберіть вставку" class="shadow pad8"/>
+                            <input type="text" autocomplete="off" name="tab_3_stick_1" list="tab_3_stick_1" id="tab_3_stick_1_selected" placeholder="Оберіть вставку" class="shadow pad8" />
                             <datalist id="tab_3_stick_1" class="shadow">
                                 <?php
-                                    $stick_list = CFS()->get('stick_list');
-                                usort($stick_list, function($a, $b) {
-                                return $a['stick_count'] - $b['stick_count'];
+                                $stick_list = CFS()->get('stick_list');
+                                usort($stick_list, function ($a, $b) {
+                                    return $a['stick_count'] - $b['stick_count'];
                                 });
 
                                 foreach ($stick_list as $index => $stick_item) {
                                 ?>
-                                <option
+                                    <option
                                         data-id="<?php echo $index + 1; ?>"
                                         data-stick="<?php echo $stick_item['stick_name']; ?>"
                                         data-count="<?php echo $stick_item['stick_count']; ?>"
                                         value="<?php echo $stick_item['stick_name']; ?>">
-                                    <?php echo $stick_item['stick_count']; ?>
-                                </option>
+                                        <?php echo $stick_item['stick_count']; ?>
+                                    </option>
                                 <?php
                                 }
                                 ?>
@@ -736,7 +742,7 @@ get_header();
                             К-сть
                         </div>
                         <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                            <input type="number" name="tab_3_stick_1_count" id="tab_3_stick_1_count" max="7"/>
+                            <input type="number" name="tab_3_stick_1_count" id="tab_3_stick_1_count" max="7" />
                         </div>
                     </div>
                 </div>
@@ -747,26 +753,26 @@ get_header();
                             Вставка 2
                         </div>
                         <div class="w f fc">
-                            <input type="text" autocomplete="off" name="tab_3_stick_2" list="tab_3_stick_2" id="tab_3_stick_2_selected" placeholder="Оберіть виїмку" class="shadow pad8"/>
+                            <input type="text" autocomplete="off" name="tab_3_stick_2" list="tab_3_stick_2" id="tab_3_stick_2_selected" placeholder="Оберіть виїмку" class="shadow pad8" />
                             <datalist id="tab_3_stick_2" class="shadow">
                                 <?php
-                            $stick_list = CFS()->get('stick_list');
-                                usort($stick_list, function($a, $b) {
-                                return $a['stick_count'] - $b['stick_count'];
+                                $stick_list = CFS()->get('stick_list');
+                                usort($stick_list, function ($a, $b) {
+                                    return $a['stick_count'] - $b['stick_count'];
                                 });
 
                                 foreach ($stick_list as $index => $stick_item) {
                                 ?>
-                                <option
+                                    <option
                                         data-id="<?php echo $index + 1; ?>"
                                         data-stick="<?php echo $stick_item['stick_name']; ?>"
                                         data-count="<?php echo $stick_item['stick_count']; ?>"
                                         value="<?php echo $stick_item['stick_name']; ?>">
-                                    <?php echo $stick_item['stick_count']; ?>
-                                </option>
+                                        <?php echo $stick_item['stick_count']; ?>
+                                    </option>
                                 <?php
-                            }
-                            ?>
+                                }
+                                ?>
                             </datalist>
                         </div>
                     </div>
@@ -776,7 +782,7 @@ get_header();
                             К-сть
                         </div>
                         <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                            <input type="number" name="tab_3_stick_2_count" id="tab_3_stick_2_count" max="7"/>
+                            <input type="number" name="tab_3_stick_2_count" id="tab_3_stick_2_count" max="7" />
                         </div>
                     </div>
                 </div>
@@ -789,25 +795,25 @@ get_header();
                             Вставка 3
                         </div>
                         <div class="w f fc">
-                            <input type="text" autocomplete="off" name="tab_3_stick_3" list="tab_3_stick_3" id="tab_3_stick_3_selected" placeholder="Оберіть виїмку" class="shadow pad8"/>
+                            <input type="text" autocomplete="off" name="tab_3_stick_3" list="tab_3_stick_3" id="tab_3_stick_3_selected" placeholder="Оберіть виїмку" class="shadow pad8" />
                             <datalist id="tab_3_stick_3" class="shadow">
                                 <?php
-                            $stick_list = CFS()->get('stick_list');
-                                usort($stick_list, function($a, $b) {
-                                return $a['stick_count'] - $b['stick_count'];
+                                $stick_list = CFS()->get('stick_list');
+                                usort($stick_list, function ($a, $b) {
+                                    return $a['stick_count'] - $b['stick_count'];
                                 });
                                 foreach ($stick_list as $index => $stick_item) {
                                 ?>
-                                <option
+                                    <option
                                         data-id="<?php echo $index + 1; ?>"
                                         data-stick="<?php echo $stick_item['stick_name']; ?>"
                                         data-count="<?php echo $stick_item['stick_count']; ?>"
                                         value="<?php echo $stick_item['stick_name']; ?>">
-                                    <?php echo $stick_item['stick_count']; ?>
-                                </option>
+                                        <?php echo $stick_item['stick_count']; ?>
+                                    </option>
                                 <?php
-                            }
-                            ?>
+                                }
+                                ?>
                             </datalist>
                         </div>
                     </div>
@@ -817,7 +823,7 @@ get_header();
                             К-сть
                         </div>
                         <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                            <input type="number" name="tab_3_stick_3_count" id="tab_3_stick_3_count" max="7"/>
+                            <input type="number" name="tab_3_stick_3_count" id="tab_3_stick_3_count" max="7" />
                         </div>
                     </div>
                 </div>
@@ -828,7 +834,7 @@ get_header();
                             Вставка індівідуальна
                         </div>
                         <div class="w f fc">
-                            <input type="text" autocomplete="off" name="tab_3_stick_4" id="tab_3_stick_4_selected" placeholder="індівідуальна" class="shadow pad8" oninput="addNumber('tab_3_stick_4','tab_3_stick_4_count')"/>
+                            <input type="text" autocomplete="off" name="tab_3_stick_4" id="tab_3_stick_4_selected" placeholder="індівідуальна" class="shadow pad8" oninput="addNumber('tab_3_stick_4','tab_3_stick_4_count')" />
                         </div>
                     </div>
                     <!--К-сть-->
@@ -837,7 +843,7 @@ get_header();
                             К-сть
                         </div>
                         <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                            <input type="number" name="tab_3_stick_4_count" id="tab_3_stick_4_count"/>
+                            <input type="number" name="tab_3_stick_4_count" id="tab_3_stick_4_count" />
                         </div>
                     </div>
                 </div>
@@ -1066,41 +1072,41 @@ get_header();
             <input type="text" autocomplete="off" name="" placeholder="Пошук посуду" id="tab_3_list_search" oninput="liveSearch('tab_3_list', this.value)">
             <ul id="tab_3_list" class="f fc gap8 h300M scroll">
                 <?php
-            $tab_3_list = CFS()->get('tab_3_list');
+                $tab_3_list = CFS()->get('tab_3_list');
 
                 // Проверяем наличие данных в списке
                 if (!empty($tab_3_list)) {
-                usort($tab_3_list, function($a, $b) {
-                return $a['tab_3_count'] - $b['tab_3_count'];
-                });
+                    usort($tab_3_list, function ($a, $b) {
+                        return $a['tab_3_count'] - $b['tab_3_count'];
+                    });
 
-                foreach ($tab_3_list as $index => $tab_3_item) {
+                    foreach ($tab_3_list as $index => $tab_3_item) {
                 ?>
-                <li class="f fac gap8 list_item"
-                    data-name="<?php echo $tab_3_item['tab_3_glass'] . ' ' . $tab_3_item['tab_3_insert']; ?>"
-                    data-id="<?php echo $index + 1; ?>"
-                    data-count="<?php echo $tab_3_item['tab_3_count']; ?>">
-                        <span>
-                            <?php echo $tab_3_item['tab_3_count']; ?>
-                        </span>
-                    <span class="c4">
-                            <?php echo $tab_3_item['tab_3_glass']; ?>
-                        </span>
-                    <span class="c9">
-                            <?php echo $tab_3_item['tab_3_insert']; ?>
-                        </span>
-                </li>
+                        <li class="f fac gap8 list_item"
+                            data-name="<?php echo $tab_3_item['tab_3_glass'] . ' ' . $tab_3_item['tab_3_insert']; ?>"
+                            data-id="<?php echo $index + 1; ?>"
+                            data-count="<?php echo $tab_3_item['tab_3_count']; ?>">
+                            <span>
+                                <?php echo $tab_3_item['tab_3_count']; ?>
+                            </span>
+                            <span class="c4">
+                                <?php echo $tab_3_item['tab_3_glass']; ?>
+                            </span>
+                            <span class="c9">
+                                <?php echo $tab_3_item['tab_3_insert']; ?>
+                            </span>
+                        </li>
+                    <?php
+                    }
+                } else {
+                    // Если список пуст, выводим соответствующее сообщение
+                    ?>
+                    <li class="f fac gap8 list_item">
+                        <span>Пусто</span>
+                    </li>
                 <?php
                 }
-            } else {
-                // Если список пуст, выводим соответствующее сообщение
                 ?>
-                <li class="f fac gap8 list_item">
-                    <span>Пусто</span>
-                </li>
-                <?php
-            }
-            ?>
             </ul>
         </div>
         <div class="f fc gap8 shadow pad8 _br8 f_300 h300M">
@@ -1113,25 +1119,25 @@ get_header();
                 $stick_list = CFS()->get('stick_list');
 
                 if (!empty($stick_list)) {
-                usort($stick_list, function($a, $b) {
-                return $a['stick_count'] - $b['stick_count'];
-                });
+                    usort($stick_list, function ($a, $b) {
+                        return $a['stick_count'] - $b['stick_count'];
+                    });
 
-                foreach ($stick_list as $index => $stick_item) {
+                    foreach ($stick_list as $index => $stick_item) {
                 ?>
-                <li class="f fac gap8 list_item" data-name="<?php echo $stick_item['stick_name']; ?>" data-id="<?php echo $index + 1; ?>" data-count="<?php echo $stick_item['stick_count']; ?>">
+                        <li class="f fac gap8 list_item" data-name="<?php echo $stick_item['stick_name']; ?>" data-id="<?php echo $index + 1; ?>" data-count="<?php echo $stick_item['stick_count']; ?>">
                             <span>
                                 <?php echo $stick_item['stick_count']; ?>
                             </span>
-                    <span class="c10">
+                            <span class="c10">
                                 <?php echo $stick_item['stick_name']; ?>
                             </span>
-                </li>
-                <?php
+                        </li>
+                    <?php
                     }
                 } else {
-                ?>
-                <li class="f fac gap8 list_item">Вставок немає</li>
+                    ?>
+                    <li class="f fac gap8 list_item">Вставок немає</li>
                 <?php
                 }
                 ?>
@@ -1148,40 +1154,40 @@ get_header();
                 Посуд
             </div>
             <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_4_product" list="tab_4_product" id="tab_4_product_selected" placeholder="Оберіть посуд" class="shadow pad8" required/>
+                <input type="text" autocomplete="off" name="tab_4_product" list="tab_4_product" id="tab_4_product_selected" placeholder="Оберіть посуд" class="shadow pad8" required />
                 <datalist id="tab_4_product" class="shadow">
                     <?php
                     $tab_4_list = CFS()->get('tab_4_list');
 
-                    usort($tab_4_list, function($a, $b) {
-                    return $a['tab_4_count'] - $b['tab_4_count'];
+                    usort($tab_4_list, function ($a, $b) {
+                        return $a['tab_4_count'] - $b['tab_4_count'];
                     });
 
                     foreach ($tab_4_list as $index => $tab_4_item) {
                     ?>
-                    <option data-id="<?php echo $index + 1; ?>"
+                        <option data-id="<?php echo $index + 1; ?>"
                             data-count="<?php echo $tab_4_item['tab_4_count']; ?>"
                             data-glass="<?php echo $tab_4_item['tab_4_glass']; ?>"
                             data-insert="<?php echo $tab_4_item['tab_4_insert']; ?>"
                             data-stick="<?php
-                                if (isset($tab_4_item['tab_4_stick_list']) && is_array($tab_4_item['tab_4_stick_list']) && count($tab_4_item['tab_4_stick_list']) > 0) {
-                                    $tab_4_stick_list = $tab_4_item['tab_4_stick_list'];
-                                    foreach ($tab_4_stick_list as $stick_item) {
-                                        echo ' ( ' . $stick_item['tab_4_stick_count'] . ' - ' . $stick_item['tab_4_stick_name'] . ' ) ' ;
-                                    }
-                                }
-                            ?>"
+                                        if (isset($tab_4_item['tab_4_stick_list']) && is_array($tab_4_item['tab_4_stick_list']) && count($tab_4_item['tab_4_stick_list']) > 0) {
+                                            $tab_4_stick_list = $tab_4_item['tab_4_stick_list'];
+                                            foreach ($tab_4_stick_list as $stick_item) {
+                                                echo ' ( ' . $stick_item['tab_4_stick_count'] . ' - ' . $stick_item['tab_4_stick_name'] . ' ) ';
+                                            }
+                                        }
+                                        ?>"
 
                             value="<?php echo $tab_4_item['tab_4_count'] . ' ' . $tab_4_item['tab_4_glass'] . ($tab_4_item['tab_4_insert'] ? ' ( ' . $tab_4_item['tab_4_insert'] . ' )' : ''); ?>">
-                        <?php
-                                if (isset($tab_4_item['tab_4_stick_list']) && is_array($tab_4_item['tab_4_stick_list']) && count($tab_4_item['tab_4_stick_list']) > 0) {
-                        $tab_4_stick_list = $tab_4_item['tab_4_stick_list'];
-                        foreach ($tab_4_stick_list as $stick_item) {
-                        echo ' ( ' . $stick_item['tab_4_stick_count'] . ' - ' . $stick_item['tab_4_stick_name'] . ' ) ' ;
-                        }
-                        }
-                        ?>
-                    </option>
+                            <?php
+                            if (isset($tab_4_item['tab_4_stick_list']) && is_array($tab_4_item['tab_4_stick_list']) && count($tab_4_item['tab_4_stick_list']) > 0) {
+                                $tab_4_stick_list = $tab_4_item['tab_4_stick_list'];
+                                foreach ($tab_4_stick_list as $stick_item) {
+                                    echo ' ( ' . $stick_item['tab_4_stick_count'] . ' - ' . $stick_item['tab_4_stick_name'] . ' ) ';
+                                }
+                            }
+                            ?>
+                        </option>
                     <?php
                     }
                     ?>
@@ -1194,7 +1200,7 @@ get_header();
                 К-сть
             </div>
             <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                <input type="number" name="tab_4_count" id="tab_4_count" required/>
+                <input type="number" name="tab_4_count" id="tab_4_count" required />
             </div>
         </div>
         <!--Специалист-->
@@ -1203,25 +1209,26 @@ get_header();
                 Працівник
             </div>
             <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_4_master" list="tab_4_master" id="tab_4_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
+                <input type="text" autocomplete="off" name="tab_4_master" list="tab_4_master" id="tab_4_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
                 <datalist id="tab_4_master" class="shadow">
                     <?php
-                        $master_list_tab_4 = CFS()->get('master_list');
+                    $master_list_tab_4 = CFS()->get('master_list');
 
                     // Функция сравнения для блока tab_1_master
-                    function compare_masters_tab_4($a, $b) {
-                    $a_name = $a['master_name'];
-                    $b_name = $b['master_name'];
+                    function compare_masters_tab_4($a, $b)
+                    {
+                        $a_name = $a['master_name'];
+                        $b_name = $b['master_name'];
 
-                    // Сначала проверяем сортировку по кириллице
-                    $result = strcoll($a_name, $b_name);
+                        // Сначала проверяем сортировку по кириллице
+                        $result = strcoll($a_name, $b_name);
 
-                    // Если строки равны по кириллице, используем сортировку по английскому
-                    if ($result === 0) {
-                    return strcmp($a_name, $b_name);
-                    }
+                        // Если строки равны по кириллице, используем сортировку по английскому
+                        if ($result === 0) {
+                            return strcmp($a_name, $b_name);
+                        }
 
-                    return $result;
+                        return $result;
                     }
 
                     // Сортировка массива для блока tab_1_master
@@ -1229,10 +1236,10 @@ get_header();
 
                     foreach ($master_list_tab_4 as $index => $master_item) {
                     ?>
-                    <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
+                        <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
                     <?php
-                        }
-                        ?>
+                    }
+                    ?>
                 </datalist>
             </div>
         </div>
@@ -1259,6 +1266,7 @@ get_header();
     </form>
     <!--скрипт-->
     <script>
+      
         jQuery(function($) {
             $('.tab_4_buttons button').click(function(e) {
                 var action = $(this).attr('name'); // Получаем значение атрибута name нажатой кнопки
@@ -1340,57 +1348,57 @@ get_header();
 
                 // Проверяем наличие списка перед его использованием
                 if (!empty($tab_4_list)) {
-                // Сортируем список по полю tab_4_count
-                usort($tab_4_list, function($a, $b) {
-                return $a['tab_4_count'] - $b['tab_4_count'];
-                });
+                    // Сортируем список по полю tab_4_count
+                    usort($tab_4_list, function ($a, $b) {
+                        return $a['tab_4_count'] - $b['tab_4_count'];
+                    });
 
-                // Выводим каждый элемент списка
-                foreach ($tab_4_list as $index => $tab_4_item) {
+                    // Выводим каждый элемент списка
+                    foreach ($tab_4_list as $index => $tab_4_item) {
                 ?>
-                <li class="f fac gap8 list_item"
-                    data-name="<?php echo isset($tab_4_item['tab_4_glass']) ? $tab_4_item['tab_4_glass'] . ' ' . $tab_4_item['tab_4_insert'] : ''; ?>"
-                    data-id="<?php echo $index + 1; ?>"
-                    data-count="<?php echo isset($tab_4_item['tab_4_count']) ? $tab_4_item['tab_4_count'] : ''; ?>">
-                    <div>
-                        <?php echo isset($tab_4_item['tab_4_count']) ? $tab_4_item['tab_4_count'] : ''; ?>
-                    </div>
-                    <div class="c4">
-                        <?php echo isset($tab_4_item['tab_4_glass']) ? $tab_4_item['tab_4_glass'] : ''; ?>
-                    </div>
-                    <div class="c9">
-                        <?php echo isset($tab_4_item['tab_4_insert']) ? $tab_4_item['tab_4_insert'] : ''; ?>
-                    </div>
-                    <?php if (isset($tab_4_item['tab_4_stick_list'])) : ?>
-                    <ul class="f fac gap8">
-                        <?php
+                        <li class="f fac gap8 list_item"
+                            data-name="<?php echo isset($tab_4_item['tab_4_glass']) ? $tab_4_item['tab_4_glass'] . ' ' . $tab_4_item['tab_4_insert'] : ''; ?>"
+                            data-id="<?php echo $index + 1; ?>"
+                            data-count="<?php echo isset($tab_4_item['tab_4_count']) ? $tab_4_item['tab_4_count'] : ''; ?>">
+                            <div>
+                                <?php echo isset($tab_4_item['tab_4_count']) ? $tab_4_item['tab_4_count'] : ''; ?>
+                            </div>
+                            <div class="c4">
+                                <?php echo isset($tab_4_item['tab_4_glass']) ? $tab_4_item['tab_4_glass'] : ''; ?>
+                            </div>
+                            <div class="c9">
+                                <?php echo isset($tab_4_item['tab_4_insert']) ? $tab_4_item['tab_4_insert'] : ''; ?>
+                            </div>
+                            <?php if (isset($tab_4_item['tab_4_stick_list'])) : ?>
+                                <ul class="f fac gap8">
+                                    <?php
                                     if (isset($tab_4_item['tab_4_stick_list']) && is_array($tab_4_item['tab_4_stick_list']) && count($tab_4_item['tab_4_stick_list']) > 0) {
-                        $tab_4_stick_list = $tab_4_item['tab_4_stick_list'];
-                        foreach ($tab_4_stick_list as $index => $stick_item) {
-                        ?>
-                        <li class="f fac gap8 c10">
-                            <div>
-                                <?php echo isset($stick_item['tab_4_stick_count']) ? $stick_item['tab_4_stick_count'] : ''; ?>
-                            </div>
-                            <div>
-                                <?php echo isset($stick_item['tab_4_stick_name']) ? $stick_item['tab_4_stick_name'] : ''; ?>
-                            </div>
-                        </li>
-                        <?php
+                                        $tab_4_stick_list = $tab_4_item['tab_4_stick_list'];
+                                        foreach ($tab_4_stick_list as $index => $stick_item) {
+                                    ?>
+                                            <li class="f fac gap8 c10">
+                                                <div>
+                                                    <?php echo isset($stick_item['tab_4_stick_count']) ? $stick_item['tab_4_stick_count'] : ''; ?>
+                                                </div>
+                                                <div>
+                                                    <?php echo isset($stick_item['tab_4_stick_name']) ? $stick_item['tab_4_stick_name'] : ''; ?>
+                                                </div>
+                                            </li>
+                                    <?php
                                         }
                                     }
                                     ?>
-                    </ul>
-                    <?php endif; ?>
-                </li>
-                <?php
+                                </ul>
+                            <?php endif; ?>
+                        </li>
+                    <?php
                     }
                 } else {
                     // Если список пуст, выводим сообщение "Пусто"
                     ?>
-                <li class="f fac gap8 list_item">
-                    <span>Пусто</span>
-                </li>
+                    <li class="f fac gap8 list_item">
+                        <span>Пусто</span>
+                    </li>
                 <?php
                 }
                 ?>
@@ -1407,40 +1415,40 @@ get_header();
                 Продукт
             </div>
             <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_5_product" list="tab_5_product" id="tab_5_product_selected" placeholder="Оберіть скло" class="shadow pad8" required/>
+                <input type="text" autocomplete="off" name="tab_5_product" list="tab_5_product" id="tab_5_product_selected" placeholder="Оберіть скло" class="shadow pad8" required />
                 <datalist id="tab_5_product" class="shadow">
                     <?php
                     $tab_5_list = CFS()->get('tab_5_list');
 
-                    usort($tab_5_list, function($a, $b) {
-                    return $a['tab_5_count'] - $b['tab_5_count'];
+                    usort($tab_5_list, function ($a, $b) {
+                        return $a['tab_5_count'] - $b['tab_5_count'];
                     });
 
                     foreach ($tab_5_list as $index => $tab_5_item) {
                     ?>
-                    <option data-id="<?php echo $index + 1; ?>"
+                        <option data-id="<?php echo $index + 1; ?>"
                             data-count="<?php echo $tab_5_item['tab_5_count']; ?>"
                             data-glass="<?php echo $tab_5_item['tab_5_glass']; ?>"
                             data-insert="<?php echo $tab_5_item['tab_5_insert']; ?>"
                             data-stick="<?php
-                                if (isset($tab_5_item['tab_5_stick_list']) && is_array($tab_5_item['tab_5_stick_list']) && count($tab_5_item['tab_5_stick_list']) > 0) {
-                                    $tab_5_stick_list = $tab_5_item['tab_5_stick_list'];
-                                    foreach ($tab_5_stick_list as $stick_item) {
-                                        echo ' ( ' . $stick_item['tab_5_stick_count'] . ' - ' . $stick_item['tab_5_stick_name'] . ' ) ' ;
-                                    }
-                                }
-                            ?>"
+                                        if (isset($tab_5_item['tab_5_stick_list']) && is_array($tab_5_item['tab_5_stick_list']) && count($tab_5_item['tab_5_stick_list']) > 0) {
+                                            $tab_5_stick_list = $tab_5_item['tab_5_stick_list'];
+                                            foreach ($tab_5_stick_list as $stick_item) {
+                                                echo ' ( ' . $stick_item['tab_5_stick_count'] . ' - ' . $stick_item['tab_5_stick_name'] . ' ) ';
+                                            }
+                                        }
+                                        ?>"
 
                             value="<?php echo $tab_5_item['tab_5_count'] . ' ' . $tab_5_item['tab_5_glass'] . ($tab_5_item['tab_5_insert'] ? ' ( ' . $tab_5_item['tab_5_insert'] . ' )' : ''); ?>">
-                        <?php
-                                if (isset($tab_5_item['tab_5_stick_list']) && is_array($tab_5_item['tab_5_stick_list']) && count($tab_5_item['tab_5_stick_list']) > 0) {
-                        $tab_5_stick_list = $tab_5_item['tab_5_stick_list'];
-                        foreach ($tab_5_stick_list as $stick_item) {
-                        echo ' ( ' . $stick_item['tab_5_stick_count'] . ' - ' . $stick_item['tab_5_stick_name'] . ' ) ' ;
-                        }
-                        }
-                        ?>
-                    </option>
+                            <?php
+                            if (isset($tab_5_item['tab_5_stick_list']) && is_array($tab_5_item['tab_5_stick_list']) && count($tab_5_item['tab_5_stick_list']) > 0) {
+                                $tab_5_stick_list = $tab_5_item['tab_5_stick_list'];
+                                foreach ($tab_5_stick_list as $stick_item) {
+                                    echo ' ( ' . $stick_item['tab_5_stick_count'] . ' - ' . $stick_item['tab_5_stick_name'] . ' ) ';
+                                }
+                            }
+                            ?>
+                        </option>
                     <?php
                     }
                     ?>
@@ -1454,7 +1462,7 @@ get_header();
                 К-сть
             </div>
             <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                <input type="number" name="tab_5_count" id="tab_5_count" required/>
+                <input type="number" name="tab_5_count" id="tab_5_count" required />
             </div>
         </div>
         <!--Специалист-->
@@ -1463,25 +1471,26 @@ get_header();
                 Працівник
             </div>
             <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_5_master" list="tab_5_master" id="tab_5_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
+                <input type="text" autocomplete="off" name="tab_5_master" list="tab_5_master" id="tab_5_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
                 <datalist id="tab_5_master" class="shadow">
                     <?php
-                        $master_list_tab_5 = CFS()->get('master_list');
+                    $master_list_tab_5 = CFS()->get('master_list');
 
                     // Функция сравнения для блока tab_1_master
-                    function compare_masters_tab_5($a, $b) {
-                    $a_name = $a['master_name'];
-                    $b_name = $b['master_name'];
+                    function compare_masters_tab_5($a, $b)
+                    {
+                        $a_name = $a['master_name'];
+                        $b_name = $b['master_name'];
 
-                    // Сначала проверяем сортировку по кириллице
-                    $result = strcoll($a_name, $b_name);
+                        // Сначала проверяем сортировку по кириллице
+                        $result = strcoll($a_name, $b_name);
 
-                    // Если строки равны по кириллице, используем сортировку по английскому
-                    if ($result === 0) {
-                    return strcmp($a_name, $b_name);
-                    }
+                        // Если строки равны по кириллице, используем сортировку по английскому
+                        if ($result === 0) {
+                            return strcmp($a_name, $b_name);
+                        }
 
-                    return $result;
+                        return $result;
                     }
 
                     // Сортировка массива для блока tab_1_master
@@ -1489,10 +1498,10 @@ get_header();
 
                     foreach ($master_list_tab_5 as $index => $master_item) {
                     ?>
-                    <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
+                        <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
                     <?php
-                        }
-                        ?>
+                    }
+                    ?>
                 </datalist>
             </div>
         </div>
@@ -1609,62 +1618,62 @@ get_header();
 
                 // Проверяем наличие данных в списке
                 if (!empty($tab_5_list)) {
-                usort($tab_5_list, function($a, $b) {
-                return $a['tab_5_count'] - $b['tab_5_count'];
-                });
+                    usort($tab_5_list, function ($a, $b) {
+                        return $a['tab_5_count'] - $b['tab_5_count'];
+                    });
 
-                foreach ($tab_5_list as $index => $tab_5_item) {
+                    foreach ($tab_5_list as $index => $tab_5_item) {
                 ?>
-                <li class="f fac gap8 list_item"
-                    data-name="<?php echo $tab_5_item['tab_5_glass'] . ' ' . $tab_5_item['tab_5_insert']; ?>"
-                    data-id="<?php echo $index + 1; ?>"
-                    data-count="<?php echo $tab_5_item['tab_5_count']; ?>">
-                    <div>
-                        <?php echo $tab_5_item['tab_5_count']; ?>
-                    </div>
-                    <div class="c4">
-                        <?php echo $tab_5_item['tab_5_glass']; ?>
-                    </div>
-                    <div class="c9">
-                        <?php echo $tab_5_item['tab_5_insert']; ?>
-                    </div>
-                    <ul class="f fac gap8">
-                        <?php
-                        $tab_5_stick_list = isset($tab_5_item['tab_5_stick_list']) ? $tab_5_item['tab_5_stick_list'] : array();
-
-                        // Проверяем, есть ли вообще вставки
-                        if (!empty($tab_5_stick_list)) {
-                            // Сортируем вставки по количеству
-                            usort($tab_5_stick_list, function($a, $b) {
-                                return $a['tab_5_stick_count'] - $b['tab_5_stick_count'];
-                            });
-
-                            // Выводим каждую вставку
-                            foreach ($tab_5_stick_list as $index => $stick_item) {
-                        ?>
-                        <li class="f fac gap8 c10">
+                        <li class="f fac gap8 list_item"
+                            data-name="<?php echo $tab_5_item['tab_5_glass'] . ' ' . $tab_5_item['tab_5_insert']; ?>"
+                            data-id="<?php echo $index + 1; ?>"
+                            data-count="<?php echo $tab_5_item['tab_5_count']; ?>">
                             <div>
-                                <?php echo $stick_item['tab_5_stick_count']; ?>
+                                <?php echo $tab_5_item['tab_5_count']; ?>
                             </div>
-                            <div>
-                                <?php echo $stick_item['tab_5_stick_name']; ?>
+                            <div class="c4">
+                                <?php echo $tab_5_item['tab_5_glass']; ?>
                             </div>
+                            <div class="c9">
+                                <?php echo $tab_5_item['tab_5_insert']; ?>
+                            </div>
+                            <ul class="f fac gap8">
+                                <?php
+                                $tab_5_stick_list = isset($tab_5_item['tab_5_stick_list']) ? $tab_5_item['tab_5_stick_list'] : array();
+
+                                // Проверяем, есть ли вообще вставки
+                                if (!empty($tab_5_stick_list)) {
+                                    // Сортируем вставки по количеству
+                                    usort($tab_5_stick_list, function ($a, $b) {
+                                        return $a['tab_5_stick_count'] - $b['tab_5_stick_count'];
+                                    });
+
+                                    // Выводим каждую вставку
+                                    foreach ($tab_5_stick_list as $index => $stick_item) {
+                                ?>
+                                        <li class="f fac gap8 c10">
+                                            <div>
+                                                <?php echo $stick_item['tab_5_stick_count']; ?>
+                                            </div>
+                                            <div>
+                                                <?php echo $stick_item['tab_5_stick_name']; ?>
+                                            </div>
+                                        </li>
+                                <?php
+                                    }
+                                }
+                                ?>
+
+                            </ul>
                         </li>
-                        <?php
-                            }
-                        }
-                        ?>
-
-                    </ul>
-                </li>
-                <?php
+                    <?php
                     }
                 } else {
                     // Если список пуст, выводим сообщение "Пусто"
                     ?>
-                <li class="f fac gap8 list_item">
-                    <span>Пусто</span>
-                </li>
+                    <li class="f fac gap8 list_item">
+                        <span>Пусто</span>
+                    </li>
                 <?php
                 }
                 ?>
@@ -1679,12 +1688,12 @@ get_header();
         <div class="calendar__body">
             <input type="text" id="dateRangeInput" readonly placeholder="Выберите диапазон">
             <div class="calendar-container" id="calendarContainer" style="display: none;">
-            <div class="calendar-header">
-                <button id="prevMonth">&lt;</button>
-                <span id="currentMonth"></span>
-                <button id="nextMonth">&gt;</button>
-            </div>
-            <div class="calendar-grid" id="calendarGrid"></div>
+                <div class="calendar-header">
+                    <button id="prevMonth">&lt;</button>
+                    <span id="currentMonth"></span>
+                    <button id="nextMonth">&gt;</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
             </div>
         </div>
         <!-- <input id="search_date" type="date" name="дата"> -->
@@ -1713,76 +1722,76 @@ get_header();
     <!--Перечень таблицы-->
     <ul id="id_report_post" class="w f gap4 f_f fc">
         <?php
-    $tab_6_list = CFS()->get('tab_6_list');
+        $tab_6_list = CFS()->get('tab_6_list');
         // Проверяем наличие данных в списке перед его использованием
         if (!empty($tab_6_list)) {
-        $tab_6_list = array_reverse($tab_6_list);
-        foreach ($tab_6_list as $index => $tab_6_item) {
+            $tab_6_list = array_reverse($tab_6_list);
+            foreach ($tab_6_list as $index => $tab_6_item) {
         ?>
-        <li data-id="<?php echo $index + 1; ?>" class="id_report_post_item gap2 fac _b_b _b_t b2 pad2">
-            <div class="id_report_post_item_status pad2 _b_l _b_r id_report_post_column f fac">
-                <?php if(isset($tab_6_item['tab_6_status'])): ?>
-                <div class="tab_chapter">
-                    <?php echo $tab_6_item['tab_6_status']; ?>
-                </div>
-                <div class="tab_6_img">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/<?php echo $tab_6_item['tab_6_status']; ?>.png" alt="<?php echo $tab_6_item['tab_6_status']; ?>">
-                </div>
-                <?php endif; ?>
-            </div>
-            <div class="id_report_post_item_action pad2 _b_l _b_r id_report_post_column f fac">
-                <?php if(isset($tab_6_item['tab_6_action'])): ?>
-                <?php echo $tab_6_item['tab_6_action']; ?>
-                <?php endif; ?>
-            </div>
-            <div class="id_report_post_item_name pad2 _b_l _b_r id_report_post_column f fc">
-                <div class="id_report_post_item_name__item">
-                    <?php if(isset($tab_6_item['tab_6_name'])): ?>
-                    <?php echo $tab_6_item['tab_6_name']; ?>
-                    <?php endif; ?>
-                </div>
-                <div class="f gap5 fc id_report_post_item_name__stick">
-                    <?php if(isset($tab_6_item['tab_6_stick_list']) && is_array($tab_6_item['tab_6_stick_list'])): ?>
-                    <?php foreach ($tab_6_item['tab_6_stick_list'] as $stick_item): ?>
-                    <span><?php echo $stick_item['tab_6_stick_count'] . ' - ' . $stick_item['tab_6_stick_name']; ?></span>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <div class="id_report_post_item_count pad2 _b_l _b_r id_report_post_column f fac">
-                <?php if(isset($tab_6_item['tab_6_count'])): ?>
-                <?php echo $tab_6_item['tab_6_count']; ?>
-                <?php endif; ?>
-            </div>
-            <div class="id_report_post_item_master pad2 _b_l _b_r id_report_post_column f fac">
-                <?php if(isset($tab_6_item['tab_6_master'])): ?>
-                <?php echo $tab_6_item['tab_6_master']; ?>
-                <?php endif; ?>
-            </div>
-            <div class="id_report_post_item_time pad2 _b_l _b_r id_report_post_column f fac flex_col" data-date="<?php if(isset($tab_6_item['tab_6_date'])): ?><?php echo $tab_6_item['tab_6_date']; ?><?php endif; ?>">
-                <div class="">
-                    <?php if(isset($tab_6_item['tab_6_time'])): ?>
-                    <?php echo $tab_6_item['tab_6_time']; ?>
-                    <?php endif; ?>
-                </div>
-                <div class="">
-                    <?php if(isset($tab_6_item['tab_6_date'])): ?>
-                    <?php echo $tab_6_item['tab_6_date']; ?>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </li>
+                <li data-id="<?php echo $index + 1; ?>" class="id_report_post_item gap2 fac _b_b _b_t b2 pad2">
+                    <div class="id_report_post_item_status pad2 _b_l _b_r id_report_post_column f fac">
+                        <?php if (isset($tab_6_item['tab_6_status'])): ?>
+                            <div class="tab_chapter">
+                                <?php echo $tab_6_item['tab_6_status']; ?>
+                            </div>
+                            <div class="tab_6_img">
+                                <img src="<?php echo get_template_directory_uri(); ?>/img/<?php echo $tab_6_item['tab_6_status']; ?>.png" alt="<?php echo $tab_6_item['tab_6_status']; ?>">
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="id_report_post_item_action pad2 _b_l _b_r id_report_post_column f fac">
+                        <?php if (isset($tab_6_item['tab_6_action'])): ?>
+                            <?php echo $tab_6_item['tab_6_action']; ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="id_report_post_item_name pad2 _b_l _b_r id_report_post_column f fc">
+                        <div class="id_report_post_item_name__item">
+                            <?php if (isset($tab_6_item['tab_6_name'])): ?>
+                                <?php echo $tab_6_item['tab_6_name']; ?>
+                            <?php endif; ?>
+                        </div>
+                        <div class="f gap5 fc id_report_post_item_name__stick">
+                            <?php if (isset($tab_6_item['tab_6_stick_list']) && is_array($tab_6_item['tab_6_stick_list'])): ?>
+                                <?php foreach ($tab_6_item['tab_6_stick_list'] as $stick_item): ?>
+                                    <span><?php echo $stick_item['tab_6_stick_count'] . ' - ' . $stick_item['tab_6_stick_name']; ?></span>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="id_report_post_item_count pad2 _b_l _b_r id_report_post_column f fac">
+                        <?php if (isset($tab_6_item['tab_6_count'])): ?>
+                            <?php echo $tab_6_item['tab_6_count']; ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="id_report_post_item_master pad2 _b_l _b_r id_report_post_column f fac">
+                        <?php if (isset($tab_6_item['tab_6_master'])): ?>
+                            <?php echo $tab_6_item['tab_6_master']; ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="id_report_post_item_time pad2 _b_l _b_r id_report_post_column f fac flex_col" data-date="<?php if (isset($tab_6_item['tab_6_date'])): ?><?php echo $tab_6_item['tab_6_date']; ?><?php endif; ?>">
+                        <div class="">
+                            <?php if (isset($tab_6_item['tab_6_time'])): ?>
+                                <?php echo $tab_6_item['tab_6_time']; ?>
+                            <?php endif; ?>
+                        </div>
+                        <div class="">
+                            <?php if (isset($tab_6_item['tab_6_date'])): ?>
+                                <?php echo $tab_6_item['tab_6_date']; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </li>
+            <?php
+            }
+        } else {
+            // Если список пуст, выводим сообщение "Пусто"
+            ?>
+            <li class="f fac gap8 list_item">
+                <span>Пусто</span>
+            </li>
         <?php
         }
-    } else {
-        // Если список пуст, выводим сообщение "Пусто"
         ?>
-        <li class="f fac gap8 list_item">
-            <span>Пусто</span>
-        </li>
-        <?php
-    }
-    ?>
     </ul>
     <!--excel-->
     <div id="excelForm" class="downloadToExel">
@@ -1798,11 +1807,11 @@ get_header();
             </button>
         </div>
         <?php
-            $steclo_list = CFS()->get('glass_list');
-            $vstavka_list = CFS()->get('stick_list');   
-            $polufab_list = CFS()->get('tab_3_list'); 
-            $poclei_list = CFS()->get('tab_4_list'); 
-            $gotov_list = CFS()->get('tab_5_list');
+        $steclo_list = CFS()->get('glass_list');
+        $vstavka_list = CFS()->get('stick_list');
+        $polufab_list = CFS()->get('tab_3_list');
+        $poclei_list = CFS()->get('tab_4_list');
+        $gotov_list = CFS()->get('tab_5_list');
         ?>
         <script>
             let glassList = <?php echo json_encode($steclo_list); ?>;
@@ -1834,33 +1843,33 @@ get_header();
                             Скло
                         </div>
                         <div class="w f fc">
-                            <input  id="tab_7_glass_selected"
-                                    type="text"
-                                    name="tab_7_glass"
-                                    list="tab_7_glass"
-                                    placeholder="Оберіть скло"
-                                    class="shadow pad8" autocomplete="off" required/>
+                            <input id="tab_7_glass_selected"
+                                type="text"
+                                name="tab_7_glass"
+                                list="tab_7_glass"
+                                placeholder="Оберіть скло"
+                                class="shadow pad8" autocomplete="off" required />
                             <datalist id="tab_7_glass" class="shadow">
                                 <?php
-                            $glass_list = CFS()->get('glass_list');
+                                $glass_list = CFS()->get('glass_list');
 
                                 // Функция для сортировки массива по значению glass_count
-                                usort($glass_list, function($a, $b) {
-                                return $a['glass_count'] - $b['glass_count'];
+                                usort($glass_list, function ($a, $b) {
+                                    return $a['glass_count'] - $b['glass_count'];
                                 });
 
                                 foreach ($glass_list as $index => $glass_item) {
                                 ?>
-                                <option
+                                    <option
                                         data-id="<?php echo $index + 1; ?>"
                                         data-name="<?php echo $glass_item['glass_name']; ?>"
                                         data-count="<?php echo $glass_item['glass_count']; ?>"
                                         value="<?php echo $glass_item['glass_name']; ?>">
-                                    <?php echo $glass_item['glass_count']; ?>
-                                </option>
+                                        <?php echo $glass_item['glass_count']; ?>
+                                    </option>
                                 <?php
-                            }
-                            ?>
+                                }
+                                ?>
                             </datalist>
                         </div>
                     </div>
@@ -1870,7 +1879,7 @@ get_header();
                             К-сть
                         </div>
                         <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                            <input type="number" name="tab_7_glass_count" id="tab_7_glass_count" required/>
+                            <input type="number" name="tab_7_glass_count" id="tab_7_glass_count" required />
                         </div>
                     </div>
                 </div>
@@ -1881,25 +1890,26 @@ get_header();
                         Працівник
                     </div>
                     <div class="w f fc">
-                        <input type="text" autocomplete="off" name="tab_7_glass_master" list="tab_7_glass_master" id="tab_7_glass_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
+                        <input type="text" autocomplete="off" name="tab_7_glass_master" list="tab_7_glass_master" id="tab_7_glass_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
                         <datalist id="tab_7_glass_master" class="shadow">
                             <?php
-                        $master_list_glass = CFS()->get('master_list');
+                            $master_list_glass = CFS()->get('master_list');
 
                             // Функция сравнения для блока tab_1_master
-                            function compare_masters_glass($a, $b) {
-                            $a_name = $a['master_name'];
-                            $b_name = $b['master_name'];
+                            function compare_masters_glass($a, $b)
+                            {
+                                $a_name = $a['master_name'];
+                                $b_name = $b['master_name'];
 
-                            // Сначала проверяем сортировку по кириллице
-                            $result = strcoll($a_name, $b_name);
+                                // Сначала проверяем сортировку по кириллице
+                                $result = strcoll($a_name, $b_name);
 
-                            // Если строки равны по кириллице, используем сортировку по английскому
-                            if ($result === 0) {
-                            return strcmp($a_name, $b_name);
-                            }
+                                // Если строки равны по кириллице, используем сортировку по английскому
+                                if ($result === 0) {
+                                    return strcmp($a_name, $b_name);
+                                }
 
-                            return $result;
+                                return $result;
                             }
 
                             // Сортировка массива для блока tab_1_master
@@ -1907,10 +1917,10 @@ get_header();
 
                             foreach ($master_list_glass as $index => $master_item) {
                             ?>
-                            <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
+                                <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
                             <?php
-                        }
-                        ?>
+                            }
+                            ?>
                         </datalist>
                     </div>
                 </div>
@@ -1928,12 +1938,12 @@ get_header();
                         <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_minus.png">
                     </button>
                     <?php if (current_user_can('administrator') || current_user_can('subscriber')) { ?>
-                    <button class="btn f_auto shadow f _f_ fac" name="Створення скла" type="submit">
-                        <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_new.png">
-                    </button>
-                    <button class="btn f_auto shadow f _f_ fac" name="Видалення скла" type="submit">
-                        <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_delete.png">
-                    </button>
+                        <button class="btn f_auto shadow f _f_ fac" name="Створення скла" type="submit">
+                            <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_new.png">
+                        </button>
+                        <button class="btn f_auto shadow f _f_ fac" name="Видалення скла" type="submit">
+                            <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_delete.png">
+                        </button>
                     <?php } ?>
                 </div>
             </div>
@@ -1941,6 +1951,10 @@ get_header();
             <input type="hidden" name="action" value="glass_form">
             <input type="hidden" name="glass_action" id="glass_action">
 
+            <div class="f fc gap8 w">
+                <div class="w BIG">Коментар</div>
+                <input type="text" name="comment" class="shadow pad8 w" />
+            </div>
         </form>
         <script>
             jQuery(function($) {
@@ -2050,141 +2064,146 @@ get_header();
             });
         </script>
 
- <!-- Виїмка -->
-<form action="<?php echo admin_url('admin-ajax.php'); ?>" id="editing_insert_form" class="f fw w gap8 f_f" method="post">
-    <div class="f fw w gap8 f_f f_600">
-        <!--Виемка-->
-        <div class="f fc gap8 f_400">
-            <div class="BIG">
-                Виїмка
+        <!-- Виїмка -->
+        <form action="<?php echo admin_url('admin-ajax.php'); ?>" id="editing_insert_form" class="f fw w gap8 f_f" method="post">
+            <div class="f fw w gap8 f_f f_600">
+                <!--Виемка-->
+                <div class="f fc gap8 f_400">
+                    <div class="BIG">
+                        Виїмка
+                    </div>
+                    <div class="w f fc">
+                        <input type="text" autocomplete="off" name="tab_7_insert" list="tab_7_insert" id="tab_7_insert_selected" placeholder="Оберіть виїмку" class="shadow pad8" required />
+                        <datalist id="tab_7_insert" class="shadow">
+                            <?php
+                            $insert_list = CFS()->get('insert_list');
+                            foreach ($insert_list as $index => $insert_item) {
+                            ?>
+                                <option data-name="<?php echo strtolower($insert_item['insert_name']); ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo strtolower($insert_item['insert_name']); ?>"></option>
+                            <?php
+                            }
+                            ?>
+                        </datalist>
+                    </div>
+                </div>
+                <!--Специалист-->
+                <div class="f fc gap8 f_200">
+                    <div class="w BIG">
+                        Працівник
+                    </div>
+                    <div class="w f fc">
+                        <input type="text" autocomplete="off" name="tab_7_insert_master" list="tab_7_insert_master" id="tab_7_insert_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
+                        <datalist id="tab_7_insert_master" class="shadow">
+                            <?php
+                            $master_list_insert = CFS()->get('master_list');
+
+                            function compare_masters_insert($a, $b)
+                            {
+                                $a_name = $a['master_name'];
+                                $b_name = $b['master_name'];
+                                $result = strcoll($a_name, $b_name);
+                                if ($result === 0) {
+                                    return strcmp($a_name, $b_name);
+                                }
+                                return $result;
+                            }
+
+                            usort($master_list_insert, 'compare_masters_insert');
+
+                            foreach ($master_list_insert as $index => $master_item) {
+                            ?>
+                                <option data-name="<?php echo strtolower($master_item['master_name']); ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo strtolower($master_item['master_name']); ?>"></option>
+                            <?php
+                            }
+                            ?>
+                        </datalist>
+                    </div>
+                </div>
             </div>
-            <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_7_insert" list="tab_7_insert" id="tab_7_insert_selected" placeholder="Оберіть виїмку" class="shadow pad8" required/>
-                <datalist id="tab_7_insert" class="shadow">
-                    <?php
-                    $insert_list = CFS()->get('insert_list');
-                    foreach ($insert_list as $index => $insert_item) {
-                    ?>
-                        <option data-name="<?php echo strtolower($insert_item['insert_name']); ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo strtolower($insert_item['insert_name']); ?>"></option>
-                    <?php
-                    }
-                    ?>
-                </datalist>
+            <input type="hidden" name="action" value="insert_form">
+            <div class="f fc gap8 f_200">
+                <div class="w BIG">
+                    Дія
+                </div>
+                <div class="f fac gap8 insert_buttons">
+                    <?php if (current_user_can('administrator') || current_user_can('subscriber')) { ?>
+                        <button class="btn f_auto shadow f _f_ fac" name="Створення виїмки" type="submit">
+                            <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_new.png">
+                        </button>
+                        <button class="btn f_auto shadow f _f_ fac" name="Видалення виїмки" type="submit">
+                            <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_delete.png">
+                        </button>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
-        <!--Специалист-->
-        <div class="f fc gap8 f_200">
-            <div class="w BIG">
-                Працівник
+            <input type="hidden" name="insert_action" id="insert_action">
+            <div class="f fc gap8 w">
+                <div class="w BIG">Коментар</div>
+                <input type="text" name="comment" class="shadow pad8 w" />
             </div>
-            <div class="w f fc">
-                <input type="text" autocomplete="off" name="tab_7_insert_master" list="tab_7_insert_master" id="tab_7_insert_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
-                <datalist id="tab_7_insert_master" class="shadow">
-                    <?php
-                    $master_list_insert = CFS()->get('master_list');
-                    
-                    function compare_masters_insert($a, $b) {
-                        $a_name = $a['master_name'];
-                        $b_name = $b['master_name'];
-                        $result = strcoll($a_name, $b_name);
-                        if ($result === 0) {
-                            return strcmp($a_name, $b_name);
+        </form>
+        <script>
+            jQuery(function($) {
+                $('.insert_buttons button').click(function(e) {
+                    e.preventDefault(); // Предотвращаем отправку формы по умолчанию
+                    var action = $(this).attr('name'); // Получаем значение атрибута name нажатой кнопки
+                    $('#insert_action').val(action); // Устанавливаем значение в скрытое поле
+
+                    var enteredMaster = $('input[name="tab_7_insert_master"]').val().trim().toLowerCase();
+                    var isMasterExists = false;
+                    $('datalist#tab_7_insert_master option').each(function() {
+                        var currentMaster = $(this).val().trim().toLowerCase();
+                        if (currentMaster === enteredMaster) {
+                            isMasterExists = true;
+                            return false;
                         }
-                        return $result;
-                    }
-                    
-                    usort($master_list_insert, 'compare_masters_insert');
-                    
-                    foreach ($master_list_insert as $index => $master_item) {
-                    ?>
-                        <option data-name="<?php echo strtolower($master_item['master_name']); ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo strtolower($master_item['master_name']); ?>"></option>
-                    <?php
-                    }
-                    ?>
-                </datalist>
-            </div>
-        </div>
-    </div>
-    <input type="hidden" name="action" value="insert_form">
-    <div class="f fc gap8 f_200">
-        <div class="w BIG">
-            Дія
-        </div>
-        <div class="f fac gap8 insert_buttons">
-            <?php if (current_user_can('administrator') || current_user_can('subscriber')) { ?>
-            <button class="btn f_auto shadow f _f_ fac" name="Створення виїмки" type="submit">
-                <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_new.png">
-            </button>
-            <button class="btn f_auto shadow f _f_ fac" name="Видалення виїмки" type="submit">
-                <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_delete.png">
-            </button>
-            <?php } ?>
-        </div>
-    </div>
-    <input type="hidden" name="insert_action" id="insert_action">
-</form>
-<script>
-    jQuery(function($) {
-        $('.insert_buttons button').click(function(e) {
-            e.preventDefault(); // Предотвращаем отправку формы по умолчанию
-            var action = $(this).attr('name'); // Получаем значение атрибута name нажатой кнопки
-            $('#insert_action').val(action); // Устанавливаем значение в скрытое поле
+                    });
 
-            var enteredMaster = $('input[name="tab_7_insert_master"]').val().trim().toLowerCase();
-            var isMasterExists = false;
-            $('datalist#tab_7_insert_master option').each(function() {
-                var currentMaster = $(this).val().trim().toLowerCase();
-                if (currentMaster === enteredMaster) {
-                    isMasterExists = true;
-                    return false;
-                }
-            });
-
-            if (!isMasterExists) {
-                alert('Оберіть фахівця зі списку.');
-                return false;
-            }
-
-            var enteredInsert = $('input[name="tab_7_insert"]').val().trim().toLowerCase();
-            if (action === 'Видалення виїмки') {
-                var isInsertExists = false;
-                $('datalist#tab_7_insert option').each(function() {
-                    var currentInsertName = $(this).val().trim().toLowerCase();
-                    if (currentInsertName === enteredInsert) {
-                        isInsertExists = true;
+                    if (!isMasterExists) {
+                        alert('Оберіть фахівця зі списку.');
                         return false;
                     }
-                });
 
-                if (!isInsertExists) {
-                    alert('Оберіть виїмку зі списку.');
-                    return false;
-                }
-            } else if (action === 'Створення виїмки') {
-                var isNewInsertExists = false;
-                $('datalist#tab_7_insert option').each(function() {
-                    var currentInsertName = $(this).val().trim().toLowerCase();
-                    if (currentInsertName === enteredInsert) {
-                        isNewInsertExists = true;
-                        return false;
+                    var enteredInsert = $('input[name="tab_7_insert"]').val().trim().toLowerCase();
+                    if (action === 'Видалення виїмки') {
+                        var isInsertExists = false;
+                        $('datalist#tab_7_insert option').each(function() {
+                            var currentInsertName = $(this).val().trim().toLowerCase();
+                            if (currentInsertName === enteredInsert) {
+                                isInsertExists = true;
+                                return false;
+                            }
+                        });
+
+                        if (!isInsertExists) {
+                            alert('Оберіть виїмку зі списку.');
+                            return false;
+                        }
+                    } else if (action === 'Створення виїмки') {
+                        var isNewInsertExists = false;
+                        $('datalist#tab_7_insert option').each(function() {
+                            var currentInsertName = $(this).val().trim().toLowerCase();
+                            if (currentInsertName === enteredInsert) {
+                                isNewInsertExists = true;
+                                return false;
+                            }
+                        });
+
+                        if (isNewInsertExists) {
+                            alert('Виїмка вже існує.');
+                            return false;
+                        }
                     }
+
+                    // Приведение значений input к нижнему регистру перед отправкой формы
+                    $('input[name="tab_7_insert"], input[name="tab_7_insert_master"]').each(function() {
+                        $(this).val($(this).val().toLowerCase());
+                    });
+
+                    $('#editing_insert_form').submit(); // Отправляем форму после всех проверок
                 });
-
-                if (isNewInsertExists) {
-                    alert('Виїмка вже існує.');
-                    return false;
-                }
-            }
-
-            // Приведение значений input к нижнему регистру перед отправкой формы
-            $('input[name="tab_7_insert"], input[name="tab_7_insert_master"]').each(function() {
-                $(this).val($(this).val().toLowerCase());
             });
-
-            $('#editing_insert_form').submit(); // Отправляем форму после всех проверок
-        });
-    });
-</script>
+        </script>
 
 
 
@@ -2201,35 +2220,35 @@ get_header();
                         </div>
                         <div class="w f fc">
                             <input id="tab_7_stick_selected"
-                                   type="text"
-                                   name="tab_7_stick"
-                                   list="tab_7_stick"
-                                   placeholder="Оберіть виїмку"
-                                   class="shadow pad8"
-                                   autocomplete="off"
-                                   required/>
+                                type="text"
+                                name="tab_7_stick"
+                                list="tab_7_stick"
+                                placeholder="Оберіть виїмку"
+                                class="shadow pad8"
+                                autocomplete="off"
+                                required />
                             <datalist
-                                    id="tab_7_stick"
-                                    class="shadow">
+                                id="tab_7_stick"
+                                class="shadow">
                                 <?php
                                 $stick_list = CFS()->get('stick_list');
 
-                                usort($stick_list, function($a, $b) {
-                                return $a['stick_count'] - $b['stick_count'];
+                                usort($stick_list, function ($a, $b) {
+                                    return $a['stick_count'] - $b['stick_count'];
                                 });
 
                                 foreach ($stick_list as $index => $stick_item) {
                                 ?>
-                                <option
+                                    <option
                                         data-name="<?php echo $stick_item['stick_name']; ?>"
                                         data-id="<?php echo $index + 1; ?>"
                                         data-count="<?php echo $stick_item['stick_count']; ?>"
                                         value="<?php echo $stick_item['stick_name']; ?>">
-                                    <?php echo $stick_item['stick_count']; ?>
-                                </option>
+                                        <?php echo $stick_item['stick_count']; ?>
+                                    </option>
                                 <?php
-                            }
-                            ?>
+                                }
+                                ?>
                             </datalist>
                         </div>
                     </div>
@@ -2239,7 +2258,7 @@ get_header();
                             К-сть
                         </div>
                         <div class="shadow  h_50m f gap20 fac _br8 list_open">
-                            <input type="number" name="tab_7_stick_count" id="tab_7_stick_count" required/>
+                            <input type="number" name="tab_7_stick_count" id="tab_7_stick_count" required />
                         </div>
                     </div>
                 </div>
@@ -2249,25 +2268,26 @@ get_header();
                         Працівник
                     </div>
                     <div class="w f fc">
-                        <input type="text" autocomplete="off" name="tab_7_stick_master" list="tab_7_stick_master" id="tab_7_stick_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
+                        <input type="text" autocomplete="off" name="tab_7_stick_master" list="tab_7_stick_master" id="tab_7_stick_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
                         <datalist id="tab_7_stick_master" class="shadow">
                             <?php
-                        $master_list_stick = CFS()->get('master_list');
+                            $master_list_stick = CFS()->get('master_list');
 
                             // Функция сравнения для блока tab_1_master
-                            function compare_masters_stick($a, $b) {
-                            $a_name = $a['master_name'];
-                            $b_name = $b['master_name'];
+                            function compare_masters_stick($a, $b)
+                            {
+                                $a_name = $a['master_name'];
+                                $b_name = $b['master_name'];
 
-                            // Сначала проверяем сортировку по кириллице
-                            $result = strcoll($a_name, $b_name);
+                                // Сначала проверяем сортировку по кириллице
+                                $result = strcoll($a_name, $b_name);
 
-                            // Если строки равны по кириллице, используем сортировку по английскому
-                            if ($result === 0) {
-                            return strcmp($a_name, $b_name);
-                            }
+                                // Если строки равны по кириллице, используем сортировку по английскому
+                                if ($result === 0) {
+                                    return strcmp($a_name, $b_name);
+                                }
 
-                            return $result;
+                                return $result;
                             }
 
                             // Сортировка массива для блока tab_1_master
@@ -2275,10 +2295,10 @@ get_header();
 
                             foreach ($master_list_stick as $index => $master_item) {
                             ?>
-                            <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
+                                <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
                             <?php
-                        }
-                        ?>
+                            }
+                            ?>
                         </datalist>
                     </div>
                 </div>
@@ -2296,18 +2316,22 @@ get_header();
                         <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_minus.png">
                     </button>
                     <?php if (current_user_can('administrator') || current_user_can('subscriber')) { ?>
-                    <button class="btn f_auto shadow f _f_ fac" name="Створення вставки" type="submit">
-                        <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_new.png">
-                    </button>
-                    <button class="btn f_auto shadow f _f_ fac" name="Видалення вставки" type="submit">
-                        <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_delete.png">
-                    </button>
+                        <button class="btn f_auto shadow f _f_ fac" name="Створення вставки" type="submit">
+                            <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_new.png">
+                        </button>
+                        <button class="btn f_auto shadow f _f_ fac" name="Видалення вставки" type="submit">
+                            <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_delete.png">
+                        </button>
                     <?php } ?>
                 </div>
             </div>
             <!--Тип запроса-->
             <input type="hidden" name="action" value="stick_form">
             <input type="hidden" name="stick_action" id="stick_action">
+            <div class="f fc gap8 w">
+                <div class="w BIG">Коментар</div>
+                <input type="text" name="comment" class="shadow pad8 w" />
+            </div>
         </form>
         <script>
             jQuery(function($) {
@@ -2402,36 +2426,37 @@ get_header();
                         П.І.Б
                     </div>
                     <div class="w f fc">
-                        <input type="text" autocomplete="off" name="tab_7_name" list="tab_7_name" id="tab_7_name_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
+                        <input type="text" autocomplete="off" name="tab_7_name" list="tab_7_name" id="tab_7_name_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
                         <datalist id="tab_7_name" class="shadow">
                             <?php
-                        $master_list_name = CFS()->get('master_list');
+                            $master_list_name = CFS()->get('master_list');
 
-                            function compare_masters($a, $b) {
-                            $a_name = $a['master_name'];
-                            $b_name = $b['master_name'];
+                            function compare_masters($a, $b)
+                            {
+                                $a_name = $a['master_name'];
+                                $b_name = $b['master_name'];
 
-                            $result = strcoll($a_name, $b_name);
+                                $result = strcoll($a_name, $b_name);
 
-                            if ($result === 0) {
-                            return strcmp($a_name, $b_name);
-                            }
+                                if ($result === 0) {
+                                    return strcmp($a_name, $b_name);
+                                }
 
-                            return $result;
+                                return $result;
                             }
 
                             usort($master_list_name, 'compare_masters');
 
                             foreach ($master_list_name as $index => $master_item) {
                             ?>
-                            <option
+                                <option
                                     data-name="<?php echo $master_item['master_name']; ?>"
                                     data-id="<?php echo $index + 1; ?>"
                                     value="<?php echo $master_item['master_name']; ?>">
-                            </option>
+                                </option>
                             <?php
-                        }
-                        ?>
+                            }
+                            ?>
                         </datalist>
                     </div>
                 </div>
@@ -2441,32 +2466,33 @@ get_header();
                         Працівник
                     </div>
                     <div class="w f fc">
-                        <input type="text" autocomplete="off" name="tab_7_name_master" list="tab_7_name_master" id="tab_7_name_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
+                        <input type="text" autocomplete="off" name="tab_7_name_master" list="tab_7_name_master" id="tab_7_name_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
                         <datalist id="tab_7_name_master" class="shadow">
                             <?php
                             $master_list_master = CFS()->get('master_list');
 
-                            function compare_masters_master($a, $b) {
-                            $a_name = $a['master_name'];
-                            $b_name = $b['master_name'];
+                            function compare_masters_master($a, $b)
+                            {
+                                $a_name = $a['master_name'];
+                                $b_name = $b['master_name'];
 
-                            $result = strcoll($a_name, $b_name);
+                                $result = strcoll($a_name, $b_name);
 
-                            if ($result === 0) {
-                            return strcmp($a_name, $b_name);
-                            }
+                                if ($result === 0) {
+                                    return strcmp($a_name, $b_name);
+                                }
 
-                            return $result;
+                                return $result;
                             }
 
                             usort($master_list_master, 'compare_masters_master');
 
                             foreach ($master_list_master as $index => $master_item) {
                             ?>
-                            <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
+                                <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
                             <?php
-                        }
-                        ?>
+                            }
+                            ?>
                         </datalist>
                     </div>
                 </div>
@@ -2480,12 +2506,12 @@ get_header();
                 </div>
                 <div class="f fac gap8 masters_buttons">
                     <?php if (current_user_can('administrator') || current_user_can('subscriber')) { ?>
-                    <button class="btn f_auto shadow f _f_ fac" name="Створення фахівця" type="submit">
-                        <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_new.png">
-                    </button>
-                    <button class="btn f_auto shadow f _f_ fac" name="Видалення фахівця" type="submit">
-                        <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_delete.png">
-                    </button>
+                        <button class="btn f_auto shadow f _f_ fac" name="Створення фахівця" type="submit">
+                            <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_new.png">
+                        </button>
+                        <button class="btn f_auto shadow f _f_ fac" name="Видалення фахівця" type="submit">
+                            <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_delete.png">
+                        </button>
                     <?php } ?>
                 </div>
             </div>
@@ -2515,21 +2541,21 @@ get_header();
                     }
 
                     if (action === 'Створення фахівця') {
-						var enteredName = $('input[name="tab_7_name"]').val().trim().toLowerCase();
+                        var enteredName = $('input[name="tab_7_name"]').val().trim().toLowerCase();
 
-						if (enteredName === '') {
-							alert('Введіть П.І.Б. для створення.');
-							return false; // Завершаем обработчик
-						}
+                        if (enteredName === '') {
+                            alert('Введіть П.І.Б. для створення.');
+                            return false; // Завершаем обработчик
+                        }
 
-						var isNameExists = $('datalist#tab_7_name option').filter(function() {
-							return $(this).val().toLowerCase() === enteredName;
-						}).length > 0;
+                        var isNameExists = $('datalist#tab_7_name option').filter(function() {
+                            return $(this).val().toLowerCase() === enteredName;
+                        }).length > 0;
 
-						if (isNameExists) {
-							alert('П.І.Б. вже існує.');
-							return false; // Завершаем обработчик
-						}
+                        if (isNameExists) {
+                            alert('П.І.Б. вже існує.');
+                            return false; // Завершаем обработчик
+                        }
                     } else if (action === 'Видалення фахівця') {
                         var enteredName = $('input[name="tab_7_name"]').val().trim();
 
@@ -2554,7 +2580,7 @@ get_header();
                         }
                     }
 
-					var formData = $('#editing_master_form').serialize();
+                    var formData = $('#editing_master_form').serialize();
 
                 });
             });
@@ -2575,30 +2601,30 @@ get_header();
 
                 // Проверяем наличие данных в списке перед его использованием
                 if (!empty($glass_list)) {
-                // Функция для сортировки массива по значению glass_count
-                usort($glass_list, function($a, $b) {
-                return $a['glass_count'] - $b['glass_count'];
-                });
+                    // Функция для сортировки массива по значению glass_count
+                    usort($glass_list, function ($a, $b) {
+                        return $a['glass_count'] - $b['glass_count'];
+                    });
 
-                // Выводим элементы списка, если данные присутствуют
-                foreach ($glass_list as $index => $glass_item) {
+                    // Выводим элементы списка, если данные присутствуют
+                    foreach ($glass_list as $index => $glass_item) {
                 ?>
-                <li class="f fac gap8 list_item" data-name="<?php echo $glass_item['glass_name']; ?>" data-id="<?php echo $index + 1; ?>" data-count="<?php echo $glass_item['glass_count']; ?>">
+                        <li class="f fac gap8 list_item" data-name="<?php echo $glass_item['glass_name']; ?>" data-id="<?php echo $index + 1; ?>" data-count="<?php echo $glass_item['glass_count']; ?>">
                             <span>
                                 <?php echo $glass_item['glass_count']; ?>
                             </span>
-                    <span class="c4">
+                            <span class="c4">
                                 <?php echo $glass_item['glass_name']; ?>
                             </span>
-                </li>
-                <?php
+                        </li>
+                    <?php
                     }
                 } else {
                     // Если список пуст, выводим сообщение "Пусто"
                     ?>
-                <li class="f fac gap8 list_item">
-                    <span>Немає Скла</span>
-                </li>
+                    <li class="f fac gap8 list_item">
+                        <span>Немає Скла</span>
+                    </li>
                 <?php
                 }
                 ?>
@@ -2615,19 +2641,19 @@ get_header();
 
                 // Проверяем наличие данных в списке перед его использованием
                 if (!empty($insert_list)) {
-                foreach ($insert_list as $index => $insert_item) {
+                    foreach ($insert_list as $index => $insert_item) {
                 ?>
-                <li class="f fac gap8 list_item c9" data-name="<?php echo $insert_item['insert_name']; ?>" data-id="<?php echo $index + 1; ?>">
-                    <?php echo $insert_item['insert_name']; ?>
-                </li>
-                <?php
+                        <li class="f fac gap8 list_item c9" data-name="<?php echo $insert_item['insert_name']; ?>" data-id="<?php echo $index + 1; ?>">
+                            <?php echo $insert_item['insert_name']; ?>
+                        </li>
+                    <?php
                     }
                 } else {
                     // Если список пуст, выводим сообщение "Пусто"
                     ?>
-                <li class="f fac gap8 list_item c9">
-                    <span>Немає виїмок</span>
-                </li>
+                    <li class="f fac gap8 list_item c9">
+                        <span>Немає виїмок</span>
+                    </li>
                 <?php
                 }
                 ?>
@@ -2645,29 +2671,29 @@ get_header();
 
                 // Проверяем наличие вставок в списке
                 if (!empty($stick_list)) {
-                // Сортируем список по количеству вставок
-                usort($stick_list, function($a, $b) {
-                return $a['stick_count'] - $b['stick_count'];
-                });
+                    // Сортируем список по количеству вставок
+                    usort($stick_list, function ($a, $b) {
+                        return $a['stick_count'] - $b['stick_count'];
+                    });
 
-                foreach ($stick_list as $index => $stick_item) {
+                    foreach ($stick_list as $index => $stick_item) {
                 ?>
-                <li class="f fac gap8 list_item" data-name="<?php echo $stick_item['stick_name']; ?>" data-id="<?php echo $index + 1; ?>" data-count="<?php echo $stick_item['stick_count']; ?>">
+                        <li class="f fac gap8 list_item" data-name="<?php echo $stick_item['stick_name']; ?>" data-id="<?php echo $index + 1; ?>" data-count="<?php echo $stick_item['stick_count']; ?>">
                             <span>
                                 <?php echo $stick_item['stick_count']; ?>
                             </span>
-                    <span class="c10">
+                            <span class="c10">
                                 <?php echo $stick_item['stick_name']; ?>
                             </span>
-                </li>
-                <?php
+                        </li>
+                    <?php
                     }
                 } else {
                     // Если список пуст, выводим сообщение "Пусто"
                     ?>
-                <li class="f fac gap8 list_item c10">
-                    <span>Немає вставок</span>
-                </li>
+                    <li class="f fac gap8 list_item c10">
+                        <span>Немає вставок</span>
+                    </li>
                 <?php
                 }
                 ?>
@@ -2685,43 +2711,43 @@ get_header();
                 <input type="text" autocomplete="off" name="" placeholder="Пошук скла" id="tab_7_tab_2_list_search" oninput="liveSearch('tab_7_tab_2_list', this.value)">
                 <ul id="tab_7_tab_2_list" class="f fc gap8 h300M scroll">
                     <?php
-    $tab_2_list = CFS()->get('tab_2_list');
+                    $tab_2_list = CFS()->get('tab_2_list');
 
                     // Проверяем наличие данных в списке
                     if (!empty($tab_2_list)) {
-                    usort($tab_2_list, function($a, $b) {
-                    return $a['tab_2_count'] - $b['tab_2_count'];
-                    });
+                        usort($tab_2_list, function ($a, $b) {
+                            return $a['tab_2_count'] - $b['tab_2_count'];
+                        });
 
-                    foreach ($tab_2_list as $index => $tab_2_item) {
+                        foreach ($tab_2_list as $index => $tab_2_item) {
                     ?>
-                    <li class="f fac gap8 list_item"
-                        data-name="<?php echo $tab_2_item['tab_2_glass'] . ' ' . $tab_2_item['tab_2_insert']; ?>"
-                        data-id="<?php echo $index + 1; ?>"
-                        data-count="<?php echo $tab_2_item['tab_2_count']; ?>">
-        <span>
-            <?php echo $tab_2_item['tab_2_count']; ?>
-        </span>
-                        <span class="c4">
-            <?php echo $tab_2_item['tab_2_glass']; ?>
-        </span>
-                        <span class="c9">
-            <?php if (isset($tab_2_item['tab_2_insert'])) {
-                echo $tab_2_item['tab_2_insert'];
-            } ?>
-        </span>
-                    </li>
+                            <li class="f fac gap8 list_item"
+                                data-name="<?php echo $tab_2_item['tab_2_glass'] . ' ' . $tab_2_item['tab_2_insert']; ?>"
+                                data-id="<?php echo $index + 1; ?>"
+                                data-count="<?php echo $tab_2_item['tab_2_count']; ?>">
+                                <span>
+                                    <?php echo $tab_2_item['tab_2_count']; ?>
+                                </span>
+                                <span class="c4">
+                                    <?php echo $tab_2_item['tab_2_glass']; ?>
+                                </span>
+                                <span class="c9">
+                                    <?php if (isset($tab_2_item['tab_2_insert'])) {
+                                        echo $tab_2_item['tab_2_insert'];
+                                    } ?>
+                                </span>
+                            </li>
+                        <?php
+                        }
+                    } else {
+                        // Если список пуст, выводим соответствующее сообщение
+                        ?>
+                        <li class="f fac gap8 list_item">
+                            <span>Пусто</span>
+                        </li>
                     <?php
-    }
-    } else {
-    // Если список пуст, выводим соответствующее сообщение
-    ?>
-                    <li class="f fac gap8 list_item">
-                        <span>Пусто</span>
-                    </li>
-                    <?php
-    }
-    ?>
+                    }
+                    ?>
                 </ul>
             </div>
             <div class="f fc gap8 shadow pad8 _br8 f_300 h300M">
@@ -2731,41 +2757,41 @@ get_header();
                 <input type="text" autocomplete="off" name="" placeholder="Пошук посуду" id="tab_7_tab_3_list_search" oninput="liveSearch('tab_7_tab_3_list', this.value)">
                 <ul id="tab_7_tab_3_list" class="f fc gap8 h300M scroll">
                     <?php
-    $tab_3_list = CFS()->get('tab_3_list');
+                    $tab_3_list = CFS()->get('tab_3_list');
 
                     // Проверяем наличие данных в списке
                     if (!empty($tab_3_list)) {
-                    usort($tab_3_list, function($a, $b) {
-                    return $a['tab_3_count'] - $b['tab_3_count'];
-                    });
+                        usort($tab_3_list, function ($a, $b) {
+                            return $a['tab_3_count'] - $b['tab_3_count'];
+                        });
 
-                    foreach ($tab_3_list as $index => $tab_3_item) {
+                        foreach ($tab_3_list as $index => $tab_3_item) {
                     ?>
-                    <li class="f fac gap8 list_item"
-                        data-name="<?php echo $tab_3_item['tab_3_glass'] . ' ' . $tab_3_item['tab_3_insert']; ?>"
-                        data-id="<?php echo $index + 1; ?>"
-                        data-count="<?php echo $tab_3_item['tab_3_count']; ?>">
-    <span>
-        <?php echo $tab_3_item['tab_3_count']; ?>
-    </span>
-                        <span class="c4">
-        <?php echo $tab_3_item['tab_3_glass']; ?>
-    </span>
-                        <span class="c9">
-        <?php echo $tab_3_item['tab_3_insert']; ?>
-    </span>
-                    </li>
+                            <li class="f fac gap8 list_item"
+                                data-name="<?php echo $tab_3_item['tab_3_glass'] . ' ' . $tab_3_item['tab_3_insert']; ?>"
+                                data-id="<?php echo $index + 1; ?>"
+                                data-count="<?php echo $tab_3_item['tab_3_count']; ?>">
+                                <span>
+                                    <?php echo $tab_3_item['tab_3_count']; ?>
+                                </span>
+                                <span class="c4">
+                                    <?php echo $tab_3_item['tab_3_glass']; ?>
+                                </span>
+                                <span class="c9">
+                                    <?php echo $tab_3_item['tab_3_insert']; ?>
+                                </span>
+                            </li>
+                        <?php
+                        }
+                    } else {
+                        // Если список пуст, выводим соответствующее сообщение
+                        ?>
+                        <li class="f fac gap8 list_item">
+                            <span>Пусто</span>
+                        </li>
                     <?php
-    }
-    } else {
-    // Если список пуст, выводим соответствующее сообщение
-    ?>
-                    <li class="f fac gap8 list_item">
-                        <span>Пусто</span>
-                    </li>
-                    <?php
-    }
-    ?>
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -2777,64 +2803,64 @@ get_header();
                 <input type="text" autocomplete="off" name="" placeholder="Пошук посуду" id="tab_7_tab_4_list_search" oninput="liveSearch('tab_7_tab_4_list', this.value)">
                 <ul id="tab_7_tab_4_list" class="f fc gap8 h300M scroll">
                     <?php
-    $tab_4_list = CFS()->get('tab_4_list');
+                    $tab_4_list = CFS()->get('tab_4_list');
 
                     // Проверяем наличие списка перед его использованием
                     if (!empty($tab_4_list)) {
-                    // Сортируем список по полю tab_4_count
-                    usort($tab_4_list, function($a, $b) {
-                    return $a['tab_4_count'] - $b['tab_4_count'];
-                    });
+                        // Сортируем список по полю tab_4_count
+                        usort($tab_4_list, function ($a, $b) {
+                            return $a['tab_4_count'] - $b['tab_4_count'];
+                        });
 
-                    // Выводим каждый элемент списка
-                    foreach ($tab_4_list as $index => $tab_4_item) {
+                        // Выводим каждый элемент списка
+                        foreach ($tab_4_list as $index => $tab_4_item) {
                     ?>
-                    <li class="f fac gap8 list_item"
-                        data-name="<?php echo isset($tab_4_item['tab_4_glass']) ? $tab_4_item['tab_4_glass'] . ' ' . $tab_4_item['tab_4_insert'] : ''; ?>"
-                        data-id="<?php echo $index + 1; ?>"
-                        data-count="<?php echo isset($tab_4_item['tab_4_count']) ? $tab_4_item['tab_4_count'] : ''; ?>">
-                        <div>
-                            <?php echo isset($tab_4_item['tab_4_count']) ? $tab_4_item['tab_4_count'] : ''; ?>
-                        </div>
-                        <div class="c4">
-                            <?php echo isset($tab_4_item['tab_4_glass']) ? $tab_4_item['tab_4_glass'] : ''; ?>
-                        </div>
-                        <div class="c9">
-                            <?php echo isset($tab_4_item['tab_4_insert']) ? $tab_4_item['tab_4_insert'] : ''; ?>
-                        </div>
-                        <?php if (isset($tab_4_item['tab_4_stick_list'])) : ?>
-                        <ul class="f fac gap8">
-                            <?php
-                if (isset($tab_4_item['tab_4_stick_list']) && is_array($tab_4_item['tab_4_stick_list']) && count($tab_4_item['tab_4_stick_list']) > 0) {
-                            $tab_4_stick_list = $tab_4_item['tab_4_stick_list'];
-                            foreach ($tab_4_stick_list as $index => $stick_item) {
-                            ?>
-                            <li class="f fac gap8 c10">
+                            <li class="f fac gap8 list_item"
+                                data-name="<?php echo isset($tab_4_item['tab_4_glass']) ? $tab_4_item['tab_4_glass'] . ' ' . $tab_4_item['tab_4_insert'] : ''; ?>"
+                                data-id="<?php echo $index + 1; ?>"
+                                data-count="<?php echo isset($tab_4_item['tab_4_count']) ? $tab_4_item['tab_4_count'] : ''; ?>">
                                 <div>
-                                    <?php echo isset($stick_item['tab_4_stick_count']) ? $stick_item['tab_4_stick_count'] : ''; ?>
+                                    <?php echo isset($tab_4_item['tab_4_count']) ? $tab_4_item['tab_4_count'] : ''; ?>
                                 </div>
-                                <div>
-                                    <?php echo isset($stick_item['tab_4_stick_name']) ? $stick_item['tab_4_stick_name'] : ''; ?>
+                                <div class="c4">
+                                    <?php echo isset($tab_4_item['tab_4_glass']) ? $tab_4_item['tab_4_glass'] : ''; ?>
                                 </div>
+                                <div class="c9">
+                                    <?php echo isset($tab_4_item['tab_4_insert']) ? $tab_4_item['tab_4_insert'] : ''; ?>
+                                </div>
+                                <?php if (isset($tab_4_item['tab_4_stick_list'])) : ?>
+                                    <ul class="f fac gap8">
+                                        <?php
+                                        if (isset($tab_4_item['tab_4_stick_list']) && is_array($tab_4_item['tab_4_stick_list']) && count($tab_4_item['tab_4_stick_list']) > 0) {
+                                            $tab_4_stick_list = $tab_4_item['tab_4_stick_list'];
+                                            foreach ($tab_4_stick_list as $index => $stick_item) {
+                                        ?>
+                                                <li class="f fac gap8 c10">
+                                                    <div>
+                                                        <?php echo isset($stick_item['tab_4_stick_count']) ? $stick_item['tab_4_stick_count'] : ''; ?>
+                                                    </div>
+                                                    <div>
+                                                        <?php echo isset($stick_item['tab_4_stick_name']) ? $stick_item['tab_4_stick_name'] : ''; ?>
+                                                    </div>
+                                                </li>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                    </ul>
+                                <?php endif; ?>
                             </li>
-                            <?php
+                        <?php
+                        }
+                    } else {
+                        // Если список пуст, выводим сообщение "Пусто"
+                        ?>
+                        <li class="f fac gap8 list_item">
+                            <span>Пусто</span>
+                        </li>
+                    <?php
                     }
-                }
-                ?>
-                        </ul>
-                        <?php endif; ?>
-                    </li>
-                    <?php
-    }
-    } else {
-    // Если список пуст, выводим сообщение "Пусто"
-    ?>
-                    <li class="f fac gap8 list_item">
-                        <span>Пусто</span>
-                    </li>
-                    <?php
-    }
-    ?>
+                    ?>
                 </ul>
             </div>
             <div class="f fc gap8 shadow pad8 _br8 f_300 h300M">
@@ -2844,241 +2870,241 @@ get_header();
                 <input type="text" autocomplete="off" name="" placeholder="Пошук товару" id="tab_7_tab_5_list_search" oninput="liveSearch('tab_7_tab_5_list', this.value)">
                 <ul id="tab_7_tab_5_list" class="f fc gap8 h300M scroll">
                     <?php
-    $tab_5_list = CFS()->get('tab_5_list');
+                    $tab_5_list = CFS()->get('tab_5_list');
 
                     // Проверяем наличие данных в списке
                     if (!empty($tab_5_list)) {
-                    usort($tab_5_list, function($a, $b) {
-                    return $a['tab_5_count'] - $b['tab_5_count'];
-                    });
+                        usort($tab_5_list, function ($a, $b) {
+                            return $a['tab_5_count'] - $b['tab_5_count'];
+                        });
 
-                    foreach ($tab_5_list as $index => $tab_5_item) {
+                        foreach ($tab_5_list as $index => $tab_5_item) {
                     ?>
-                    <li class="f fac gap8 list_item"
-                        data-name="<?php echo $tab_5_item['tab_5_glass'] . ' ' . $tab_5_item['tab_5_insert']; ?>"
-                        data-id="<?php echo $index + 1; ?>"
-                        data-count="<?php echo $tab_5_item['tab_5_count']; ?>">
-                        <div>
-                            <?php echo $tab_5_item['tab_5_count']; ?>
-                        </div>
-                        <div class="c4">
-                            <?php echo $tab_5_item['tab_5_glass']; ?>
-                        </div>
-                        <div class="c9">
-                            <?php echo $tab_5_item['tab_5_insert']; ?>
-                        </div>
-                        <ul class="f fac gap8">
-                            <?php
-    $tab_5_stick_list = isset($tab_5_item['tab_5_stick_list']) ? $tab_5_item['tab_5_stick_list'] : array();
-
-    // Проверяем, есть ли вообще вставки
-    if (!empty($tab_5_stick_list)) {
-    // Сортируем вставки по количеству
-    usort($tab_5_stick_list, function($a, $b) {
-        return $a['tab_5_stick_count'] - $b['tab_5_stick_count'];
-    });
-
-    // Выводим каждую вставку
-    foreach ($tab_5_stick_list as $index => $stick_item) {
-                            ?>
-                            <li class="f fac gap8 c10">
+                            <li class="f fac gap8 list_item"
+                                data-name="<?php echo $tab_5_item['tab_5_glass'] . ' ' . $tab_5_item['tab_5_insert']; ?>"
+                                data-id="<?php echo $index + 1; ?>"
+                                data-count="<?php echo $tab_5_item['tab_5_count']; ?>">
                                 <div>
-                                    <?php echo $stick_item['tab_5_stick_count']; ?>
+                                    <?php echo $tab_5_item['tab_5_count']; ?>
                                 </div>
-                                <div>
-                                    <?php echo $stick_item['tab_5_stick_name']; ?>
+                                <div class="c4">
+                                    <?php echo $tab_5_item['tab_5_glass']; ?>
                                 </div>
+                                <div class="c9">
+                                    <?php echo $tab_5_item['tab_5_insert']; ?>
+                                </div>
+                                <ul class="f fac gap8">
+                                    <?php
+                                    $tab_5_stick_list = isset($tab_5_item['tab_5_stick_list']) ? $tab_5_item['tab_5_stick_list'] : array();
+
+                                    // Проверяем, есть ли вообще вставки
+                                    if (!empty($tab_5_stick_list)) {
+                                        // Сортируем вставки по количеству
+                                        usort($tab_5_stick_list, function ($a, $b) {
+                                            return $a['tab_5_stick_count'] - $b['tab_5_stick_count'];
+                                        });
+
+                                        // Выводим каждую вставку
+                                        foreach ($tab_5_stick_list as $index => $stick_item) {
+                                    ?>
+                                            <li class="f fac gap8 c10">
+                                                <div>
+                                                    <?php echo $stick_item['tab_5_stick_count']; ?>
+                                                </div>
+                                                <div>
+                                                    <?php echo $stick_item['tab_5_stick_name']; ?>
+                                                </div>
+                                            </li>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+
+                                </ul>
                             </li>
-                            <?php
-    }
-    }
-    ?>
-
-                        </ul>
-                    </li>
+                        <?php
+                        }
+                    } else {
+                        // Если список пуст, выводим сообщение "Пусто"
+                        ?>
+                        <li class="f fac gap8 list_item">
+                            <span>Пусто</span>
+                        </li>
                     <?php
-    }
-    } else {
-    // Если список пуст, выводим сообщение "Пусто"
-    ?>
-                    <li class="f fac gap8 list_item">
-                        <span>Пусто</span>
-                    </li>
-                    <?php
-    }
-    ?>
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
     </div>
 
     <?php if (current_user_can('administrator') || current_user_can('subscriber')) { ?>
-    <!-- Списки -->
-    <form action="<?php echo admin_url('admin-ajax.php'); ?>" id="editing_list_form" class="f fw w gap8 f_f pad56t pad56b" method="post">
-        <div class="f fw w gap8 f_f f_600">
-            <!--Список-->
-            <div class="f fc gap8 f_400">
-                <div class="w BIG">
-                    Список
-                </div>
-                <div class="w f fc">
-                    <input type="text" autocomplete="off" name="tab_7_list" list="tab_7_list" id="tab_7_list_selected" placeholder="Оберіть список" class="shadow pad8" required/>
-                    <datalist id="tab_7_list" class="shadow">
-                        <option
+        <!-- Списки -->
+        <form action="<?php echo admin_url('admin-ajax.php'); ?>" id="editing_list_form" class="f fw w gap8 f_f pad56t pad56b" method="post">
+            <div class="f fw w gap8 f_f f_600">
+                <!--Список-->
+                <div class="f fc gap8 f_400">
+                    <div class="w BIG">
+                        Список
+                    </div>
+                    <div class="w f fc">
+                        <input type="text" autocomplete="off" name="tab_7_list" list="tab_7_list" id="tab_7_list_selected" placeholder="Оберіть список" class="shadow pad8" required />
+                        <datalist id="tab_7_list" class="shadow">
+                            <option
                                 data-name="Піч"
                                 data-id="2"
                                 value="Піч">
-                        </option>
-                        <option
+                            </option>
+                            <option
                                 data-name="Напівфабрикат"
                                 data-id="3"
                                 value="Напівфабрикат">
-                        </option>
-                        <option
+                            </option>
+                            <option
                                 data-name="Поклейка"
                                 data-id="4"
                                 value="Поклейка">
-                        </option>
-                        <option
+                            </option>
+                            <option
                                 data-name="Готове"
                                 data-id="5"
                                 value="Готове">
-                        </option>
-                        <option
+                            </option>
+                            <option
                                 data-name="Звіт"
                                 data-id="6"
                                 value="Звіт">
-                        </option>
-                        <option
+                            </option>
+                            <option
                                 data-name="Скло"
                                 data-id="7"
                                 value="Скло">
-                        </option>
-                        <option
+                            </option>
+                            <option
                                 data-name="Виїмка"
                                 data-id="8"
                                 value="Виїмка">
-                        </option>
-                        <option
+                            </option>
+                            <option
                                 data-name="Вставка"
                                 data-id="9"
                                 value="Вставка">
-                        </option>
-                    </datalist>
+                            </option>
+                        </datalist>
+                    </div>
+                </div>
+                <!--Специалист-->
+                <div class="f fc gap8 f_200">
+                    <div class="w BIG">
+                        Працівник
+                    </div>
+                    <div class="w f fc">
+                        <input type="text" autocomplete="off" name="tab_7_list_master" list="tab_7_list_master" id="tab_7_list_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required />
+                        <datalist id="tab_7_list_master" class="shadow">
+                            <?php
+                            $master_list_master = CFS()->get('master_list');
+
+                            function compare_list_master($a, $b)
+                            {
+                                $a_name = $a['master_list'];
+                                $b_name = $b['master_list'];
+
+                                $result = strcoll($a_name, $b_name);
+
+                                if ($result === 0) {
+                                    return strcmp($a_name, $b_name);
+                                }
+
+                                return $result;
+                            }
+
+                            usort($master_list_master, 'compare_list_master');
+
+                            foreach ($master_list_master as $index => $master_item) {
+                            ?>
+                                <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
+                            <?php
+                            }
+                            ?>
+                        </datalist>
+                    </div>
                 </div>
             </div>
-            <!--Специалист-->
+            <!--Скрытый-->
+            <input type="hidden" name="action" value="list_form">
+            <!--Действие-->
             <div class="f fc gap8 f_200">
                 <div class="w BIG">
-                    Працівник
+                    Дія
                 </div>
-                <div class="w f fc">
-                    <input type="text" autocomplete="off" name="tab_7_list_master" list="tab_7_list_master" id="tab_7_list_master_selected" placeholder="Оберіть фахівця" class="shadow pad8" required/>
-                    <datalist id="tab_7_list_master" class="shadow">
-                        <?php
-                        $master_list_master = CFS()->get('master_list');
-
-                        function compare_list_master($a, $b) {
-                        $a_name = $a['master_list'];
-                        $b_name = $b['master_list'];
-
-                        $result = strcoll($a_name, $b_name);
-
-                        if ($result === 0) {
-                        return strcmp($a_name, $b_name);
-                        }
-
-                        return $result;
-                        }
-
-                        usort($master_list_master, 'compare_list_master');
-
-                        foreach ($master_list_master as $index => $master_item) {
-                        ?>
-                        <option data-name="<?php echo $master_item['master_name']; ?>" data-id="<?php echo $index + 1; ?>" value="<?php echo $master_item['master_name']; ?>"></option>
-                        <?php
-                    }
-                    ?>
-                    </datalist>
+                <div class="f fac gap8 list_buttons">
+                    <button class="btn f_auto shadow f _f_ fac" name="Видалення" type="submit">
+                        <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_delete.png">
+                    </button>
                 </div>
             </div>
-        </div>
-        <!--Скрытый-->
-        <input type="hidden" name="action" value="list_form">
-        <!--Действие-->
-        <div class="f fc gap8 f_200">
-            <div class="w BIG">
-                Дія
-            </div>
-            <div class="f fac gap8 list_buttons">
-                <button class="btn f_auto shadow f _f_ fac" name="Видалення" type="submit">
-                    <img class="img_act" src="<?php echo get_template_directory_uri(); ?>/img/item_delete.png">
-                </button>
-            </div>
-        </div>
-        <!--Тип запроса-->
-        <input type="hidden" name="list_action" id="list_action">
-    </form>
-    <script>
-        jQuery(function($) {
-            $('.list_buttons button').click(function(e) {
-                var action = $(this).attr('name'); // Получаем значение атрибута name нажатой кнопки
-                $('#list_action').val(action); // Устанавливаем значение в скрытое поле
+            <!--Тип запроса-->
+            <input type="hidden" name="list_action" id="list_action">
+        </form>
+        <script>
+            jQuery(function($) {
+                $('.list_buttons button').click(function(e) {
+                    var action = $(this).attr('name'); // Получаем значение атрибута name нажатой кнопки
+                    $('#list_action').val(action); // Устанавливаем значение в скрытое поле
 
-                var enteredMaster = $('input[name="tab_7_list_master"]').val().trim(); // Получаем значение выбранного специалиста
+                    var enteredMaster = $('input[name="tab_7_list_master"]').val().trim(); // Получаем значение выбранного специалиста
 
-                var isMasterExists = false;
-                $('datalist#tab_7_list_master option').each(function() {
-                    var currentMaster = $(this).val().trim();
-                    if (currentMaster === enteredMaster) {
-                        isMasterExists = true;
-                        return false; // Прерываем цикл, так как совпадение найдено
+                    var isMasterExists = false;
+                    $('datalist#tab_7_list_master option').each(function() {
+                        var currentMaster = $(this).val().trim();
+                        if (currentMaster === enteredMaster) {
+                            isMasterExists = true;
+                            return false; // Прерываем цикл, так как совпадение найдено
+                        }
+                    });
+
+                    if (!isMasterExists) {
+                        alert('Оберіть фахівця зі списку.');
+                        return false; // Завершаем обработчик
                     }
-                });
 
-                if (!isMasterExists) {
-                    alert('Оберіть фахівця зі списку.');
-                    return false; // Завершаем обработчик
-                }
+                    var enteredName = $('input[name="tab_7_list"]').val().trim(); // Получаем значение выбранного специалиста
 
-                var enteredName = $('input[name="tab_7_list"]').val().trim(); // Получаем значение выбранного специалиста
+                    var isNameExists = false;
+                    $('datalist#tab_7_list option').each(function() {
+                        var currentName = $(this).val().trim();
+                        if (currentName === enteredName) {
+                            isNameExists = true;
+                            return false; // Прерываем цикл, так как совпадение найдено
+                        }
+                    });
 
-                var isNameExists = false;
-                $('datalist#tab_7_list option').each(function() {
-                    var currentName = $(this).val().trim();
-                    if (currentName === enteredName) {
-                        isNameExists = true;
-                        return false; // Прерываем цикл, так как совпадение найдено
+                    if (!isNameExists) {
+                        alert('Оберіть список зі списку.');
+                        return false; // Завершаем обработчик
                     }
+
+                    var confirmation = confirm('Ви впевнені, що хочете видалити все ' + enteredName + '?');
+                    if (!confirmation) {
+                        return false; // Отмена отправки формы, если пользователь отказался
+                    }
+
+                    var formData = $('#editing_list_form').serialize();
+
                 });
-
-                if (!isNameExists) {
-                    alert('Оберіть список зі списку.');
-                    return false; // Завершаем обработчик
-                }
-
-                var confirmation = confirm('Ви впевнені, що хочете видалити все ' + enteredName + '?');
-                if (!confirmation) {
-                    return false; // Отмена отправки формы, если пользователь отказался
-                }
-
-                var formData = $('#editing_list_form').serialize();
-
             });
-        });
-    </script>
+        </script>
     <?php } ?>
 </section>
 <?php
 // Проверяем, является ли текущий пользователь администратором
-if ( ! current_user_can( 'administrator' ) ) {
+if (! current_user_can('administrator')) {
     // Если пользователь не администратор, применяем стиль CSS
     echo '<style>';
-echo '#wpadminbar { display: none; }';
-echo '</style>';
+    echo '#wpadminbar { display: none; }';
+    echo '</style>';
 }
 ?>
 <?php
 get_footer();
 ?>
-
