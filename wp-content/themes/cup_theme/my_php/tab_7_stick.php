@@ -9,6 +9,7 @@ function process_stick_form() {
     $stick_name = isset($_POST['tab_7_stick']) ? sanitize_text_field($_POST['tab_7_stick']) : '';
     $stick_count = ($stick_action === 'Видалення вставки') ? 'Все' : (isset($_POST['tab_7_stick_count']) ? intval($_POST['tab_7_stick_count']) : 0);
     $stick_master = isset($_POST['tab_7_stick_master']) ? sanitize_text_field($_POST['tab_7_stick_master']) : '';
+    $stick_comments = isset($_POST['tab_7_stick_comment']) ? sanitize_text_field($_POST['tab_7_stick_comment']) : '';
 
     $current_datetime = current_time('mysql');
     list($current_date, $current_time) = explode(' ', $current_datetime);
@@ -20,7 +21,8 @@ function process_stick_form() {
         if ($stick_name && $stick_count > 0 && $stick_master && $stick_action) {
             $stick_block = array(
                 'stick_count' => $stick_count,
-                'stick_name' => $stick_name
+                'stick_name' => $stick_name,
+                'stick_comments'=>$stick_comments
             );
 
             $existing_stick_list = CFS()->get('stick_list', 10);
@@ -48,7 +50,7 @@ function process_stick_form() {
                 if ($stick_item['stick_name'] === $stick_name) {
                     // Найдено стекло, обновляем его количество
                     $existing_stick_list[$key]['stick_count'] += $stick_count;
-
+                    $existing_stick_list[$key]['stick_comments'] = $stick_comments;
                     // Сохраняем обновленный список стекол
                     $field_data_stick = array(
                         'stick_list' => $existing_stick_list
@@ -77,6 +79,7 @@ function process_stick_form() {
                 if ($stick_item['stick_name'] === $stick_name) {
                     // Найдено стекло, уменьшаем его количество
                     $existing_stick_list[$key]['stick_count'] -= $stick_count;
+                    $existing_stick_list[$key]['stick_comments'] = $stick_comments;
 
                     // Проверяем, чтобы количество стекла не стало отрицательным
                     if ($existing_stick_list[$key]['stick_count'] < 0) {
@@ -133,7 +136,8 @@ function process_stick_form() {
         'tab_6_master' => $stick_master,
         'tab_6_action' => $stick_action,
         'tab_6_time' => $current_time,
-        'tab_6_date' => $current_date
+        'tab_6_date' => $current_date,
+        'tab_6_comment' => $stick_comments,
     );
 
     $existing_report_list = CFS()->get('tab_6_list', 10);

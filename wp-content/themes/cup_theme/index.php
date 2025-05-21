@@ -1953,7 +1953,7 @@ get_header();
 
             <div class="f fc gap8 w">
                 <div class="w BIG">Коментар</div>
-                <input type="text" name="comment" class="shadow pad8 w" />
+                <input type="text" name="tab_7_glass_comment" id="tab_7_glass_comment" class="shadow pad8 w" style="background-image: none;"/>
             </div>
         </form>
         <script>
@@ -1961,9 +1961,7 @@ get_header();
                 $('.glass_buttons button').click(function(e) {
                     var action = $(this).attr('name');
                     $('#glass_action').val(action);
-
                     var enteredMaster = $('input[name="tab_7_glass_master"]').val().trim().toLowerCase();
-
                     var isMasterExists = false;
                     $('datalist#tab_7_glass_master option').each(function() {
                         var currentMaster = $(this).val().trim().toLowerCase();
@@ -1972,13 +1970,10 @@ get_header();
                             return false;
                         }
                     });
-
                     if (!isMasterExists) {
                         alert('Оберіть фахівця зі списку.');
                         return false;
                     }
-
-
                     if (action === 'Віднімання скла') {
                         var enteredGlassCount = parseInt($('#tab_7_glass_count').val()); // Получаем количество введенного стекла
                         var selectedGlassCount = parseInt($('#tab_7_glass_selected').attr('data-count')); // Получаем количество стекла из атрибута data-count
@@ -2059,7 +2054,6 @@ get_header();
                     }
 
                     var formData = $('#editing_glass_form').serialize();
-
                 });
             });
         </script>
@@ -2139,7 +2133,7 @@ get_header();
             <input type="hidden" name="insert_action" id="insert_action">
             <div class="f fc gap8 w">
                 <div class="w BIG">Коментар</div>
-                <input type="text" name="comment" class="shadow pad8 w" />
+                <input type="text" name="tab_7_insert_comment" id="tab_7_insert_comment" class="shadow pad8 w" style="background-image: none;"/>
             </div>
         </form>
         <script>
@@ -2204,10 +2198,6 @@ get_header();
                 });
             });
         </script>
-
-
-
-
 
         <!-- Вставка -->
         <form action="<?php echo admin_url('admin-ajax.php'); ?>" id="editing_stick_form" class="f fw w gap8 f_f" method="post">
@@ -2330,7 +2320,7 @@ get_header();
             <input type="hidden" name="stick_action" id="stick_action">
             <div class="f fc gap8 w">
                 <div class="w BIG">Коментар</div>
-                <input type="text" name="comment" class="shadow pad8 w" />
+                <input type="text" name="tab_7_stick_comment" id="tab_7_stick_comment" class="shadow pad8 w" style="background-image: none;"/>
             </div>
         </form>
         <script>
@@ -2616,6 +2606,9 @@ get_header();
                             <span class="c4">
                                 <?php echo $glass_item['glass_name']; ?>
                             </span>
+                            <div class="tooltip-text">
+                                <?php echo $glass_item['glass_comments']; ?>
+                            </div>
                         </li>
                     <?php
                     }
@@ -2645,6 +2638,9 @@ get_header();
                 ?>
                         <li class="f fac gap8 list_item c9" data-name="<?php echo $insert_item['insert_name']; ?>" data-id="<?php echo $index + 1; ?>">
                             <?php echo $insert_item['insert_name']; ?>
+                            <div class="tooltip-text">
+                                <?php echo $insert_item['insert_comments']; ?>
+                            </div>
                         </li>
                     <?php
                     }
@@ -2685,6 +2681,9 @@ get_header();
                             <span class="c10">
                                 <?php echo $stick_item['stick_name']; ?>
                             </span>
+                            <div class="tooltip-text">
+                                <?php echo $stick_item['stick_comments']; ?>
+                            </div>
                         </li>
                     <?php
                     }

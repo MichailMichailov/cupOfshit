@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     filterAndSearch();
 
@@ -29,15 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Универсальная функция для преобразования текста в нижний регистр при вводе
 function convertToLowerCaseOnInput(element) {
-    element.addEventListener('input', function() {
+    element.addEventListener('input', function () {
         this.value = this.value.toLowerCase();
     });
 }
 
 // Применение функции ко всем текстовым полям на странице
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var textInputs = document.querySelectorAll('input[type="text"]');
-    textInputs.forEach(function(input) {
+    textInputs.forEach(function (input) {
         convertToLowerCaseOnInput(input);
     });
 });
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Функция для установки красного цвета для элементов списка с действием "Брак" или "Продано"
 function setRedColorForDefects() {
     var items = document.querySelectorAll('#id_report_post .id_report_post_item');
-    items.forEach(function(item) {
+    items.forEach(function (item) {
         var text = item.textContent.toLowerCase();
         if (text.includes('брак')) {
             item.style.color = 'var(--c6)';
@@ -185,19 +185,19 @@ function createCountAndMaxValue(listId, targetInputId) {
 }
 
 // Добавляем обработчик события input для поля с наименованием
-document.getElementById('tab_1_glass_selected').addEventListener('input', function() {
+document.getElementById('tab_1_glass_selected').addEventListener('input', function () {
     createCountAndMaxValue('tab_1_glass', 'tab_1_count');
 });
-document.getElementById('tab_2_glass_selected').addEventListener('input', function() {
+document.getElementById('tab_2_glass_selected').addEventListener('input', function () {
     createCountAndMaxValue('tab_2_glass', 'tab_2_count');
 });
-document.getElementById('tab_3_glass_selected').addEventListener('input', function() {
+document.getElementById('tab_3_glass_selected').addEventListener('input', function () {
     createCountAndMaxValue('tab_3_glass', 'tab_3_count');
 });
-document.getElementById('tab_4_product_selected').addEventListener('input', function() {
+document.getElementById('tab_4_product_selected').addEventListener('input', function () {
     createCountAndMaxValue('tab_4_product', 'tab_4_count');
 });
-document.getElementById('tab_5_product_selected').addEventListener('input', function() {
+document.getElementById('tab_5_product_selected').addEventListener('input', function () {
     createCountAndMaxValue('tab_5_product', 'tab_5_count');
 });
 
@@ -248,7 +248,7 @@ function updateDataCount(selectedInputId, dataListId) {
     var dataList = document.getElementById(dataListId);
     var selectedInput = document.getElementById(selectedInputId);
 
-    selectedInput.addEventListener('input', function() {
+    selectedInput.addEventListener('input', function () {
         var selectedOption = dataList.querySelector('option[value="' + selectedInput.value + '"]');
         if (selectedOption) {
             var count = selectedOption.getAttribute('data-count');
@@ -259,7 +259,7 @@ function updateDataCount(selectedInputId, dataListId) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     updateDataCount('tab_7_stick_selected', 'tab_7_stick');
     updateDataCount('tab_7_glass_selected', 'tab_7_glass');
 
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function showTab(tabId) {
     // Скрыть все табы
     var tabs = document.querySelectorAll('.tabs__block');
-    tabs.forEach(function(tab) {
+    tabs.forEach(function (tab) {
         tab.classList.remove('active-tab');
     });
 
@@ -290,11 +290,11 @@ function showTab(tabId) {
 }
 
 // функция выбраного таба
-function clickButtonTab () {
+function clickButtonTab() {
     for (var i = 1; i <= 7; i++) {
         var buttonId = 'tab_' + i + '_button';
         var button = document.getElementById(buttonId);
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             setActiveButton();
         });
     }
@@ -352,7 +352,7 @@ function setupDateAndFilters() {
 function filterAndSearch() {
     var selectedDate = document.getElementById('dateRangeInput').value;//search_date
     var [startDate, endDate] = selectedDate.split(" - ");
-    endDate = endDate===undefined?startDate:endDate;
+    endDate = endDate === undefined ? startDate : endDate;
     var searchStatus = document.getElementById('searchStatus').value.trim().toLowerCase();
     var searchAction = document.getElementById('searchAction').value.trim().toLowerCase();
     var searchName = document.getElementById('searchName').value.trim().toLowerCase();
@@ -361,7 +361,7 @@ function filterAndSearch() {
     var searchTime = document.getElementById('searchTime').value.trim().toLowerCase();
 
     var listItems = document.querySelectorAll('#id_report_post .id_report_post_item');
-    listItems.forEach(function(item) {
+    listItems.forEach(function (item) {
         var itemDate = item.querySelector('.id_report_post_item_time').getAttribute('data-date');
         var statusValue = item.querySelector('.id_report_post_item_status').textContent.trim().toLowerCase();
         var actionValue = item.querySelector('.id_report_post_item_action').textContent.trim().toLowerCase();
@@ -373,8 +373,8 @@ function filterAndSearch() {
         var listItem = item.closest('.id_report_post_item');
 
         // Проверяем совпадение даты
-        var dateMatch = (selectedDate === '' || (new Date(itemDate) >= new Date(startDate) 
-                                             && new Date(itemDate) <= new Date(endDate)));
+        var dateMatch = (selectedDate === '' || (new Date(itemDate) >= new Date(startDate)
+            && new Date(itemDate) <= new Date(endDate)));
 
 
         // Проверяем совпадение поисковых текстов
@@ -422,7 +422,7 @@ function redCount() {
     var allItems = document.querySelectorAll('.list_stock *');
 
     // Перебираем каждый элемент на странице
-    allItems.forEach(function(item) {
+    allItems.forEach(function (item) {
         // Получаем текстовое содержимое элемента
         var textContent = item.textContent.trim();
         // Проверяем, является ли содержимое числом и меньше ли оно 2000
@@ -435,7 +435,7 @@ function redCount() {
 
 
 //функция отображения реального времени
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Функция для обновления даты и времени
     function updateDateTime() {
         // Получаем текущую дату и время
@@ -476,12 +476,12 @@ function addNumber(fieldName, counterName) {
 // Функция для формирования и скачивания файла Excel
 function exportAndDownloadExcel(flag) {
     // Получаем отфильтрованные элементы таблицы
-    var filteredItems = flag===0 ? 
-            document.querySelectorAll('#id_report_post .id_report_post_item[style*="display: flex"]'):
-            document.querySelectorAll('#id_report_post .id_report_post_item');
-            
+    var filteredItems = flag === 0 ?
+        document.querySelectorAll('#id_report_post .id_report_post_item[style*="display: flex"]') :
+        document.querySelectorAll('#id_report_post .id_report_post_item');
+
     var sheetData = [];
-    var headers = ['Статус','Дія', 'Найменування', 'К-сть', 'Фахівець', 'Час'];
+    var headers = ['Статус', 'Дія', 'Найменування', 'К-сть', 'Фахівець', 'Час'];
 
     // Добавляем заголовок "Звіт" и текущую дату в начало массива данных
     var reportTitle = ['Звіт'];
@@ -489,14 +489,14 @@ function exportAndDownloadExcel(flag) {
     sheetData.push(reportTitle, currentDate, headers);
 
     // Получаем данные из отфильтрованных элементов и добавляем их в массив данных
-    filteredItems.forEach(function(item) {
+    filteredItems.forEach(function (item) {
         var status = item.querySelector('.id_report_post_item_status').textContent.trim();
         var action = item.querySelector('.id_report_post_item_action').textContent.trim();
         var nameItems = item.querySelectorAll('.id_report_post_item_name__item');
         var slc = String(status).toLowerCase()
         var nlc = String(nameItems).toLowerCase()
-        if((flag === 2) && !(slc.includes('поклейка') || slc.includes('напівфабрикат') 
-                            || nlc.includes('скло') || nlc.includes('вставка')) ){
+        if ((flag === 2) && !(slc.includes('поклейка') || slc.includes('напівфабрикат')
+            || nlc.includes('скло') || nlc.includes('вставка'))) {
             return
         }
         var count = item.querySelector('.id_report_post_item_count').textContent.trim();
@@ -506,13 +506,13 @@ function exportAndDownloadExcel(flag) {
         var nameData = '';
 
         // Получаем информацию о наименованиях
-        nameItems.forEach(function(nameItem, index) {
+        nameItems.forEach(function (nameItem, index) {
             nameData += nameItem.textContent.trim();
             // Если есть вставки, добавляем их вместе с наименованием, разделяя переносом строки
             var stickItems = item.querySelectorAll('.id_report_post_item_name__stick span');
             if (stickItems.length > 0 && index === 0) {
                 nameData += '\n';
-                stickItems.forEach(function(stickItem) {
+                stickItems.forEach(function (stickItem) {
                     nameData += stickItem.textContent.trim() + '\n';
                 });
             }
@@ -528,7 +528,7 @@ function exportAndDownloadExcel(flag) {
 
     // Формируем имя файла из слова "Звіт" и выбранной даты, если дата выбрана
     var selectedDate = document.getElementById('dateRangeInput').value;//search_date
-    var fileName = selectedDate ? 'Звіт_' + selectedDate + (flag===0?'':flag===1?'_all':'_availability') +'.xlsx' : 'report.xlsx';
+    var fileName = selectedDate ? 'Звіт_' + selectedDate + (flag === 0 ? '' : flag === 1 ? '_all' : '_availability') + '.xlsx' : 'report.xlsx';
 
     // Создаем новую книгу Excel
     var workbook = XLSX.utils.book_new();
@@ -539,49 +539,49 @@ function exportAndDownloadExcel(flag) {
     XLSX.writeFile(workbook, fileName);
 }
 
-function exportAndDownloadExcelSort(){      
+function exportAndDownloadExcelSort() {
     var sheetData = [];
-    var headers = ['Тип','Назва','К-сть'];
+    var headers = ['Тип', 'Назва', 'К-сть'];
     var reportTitle = ['Звіт_Наявність'];
     var selectedDate = new Date().toLocaleDateString('uk-UA')
     var currentDate = ['Дата: ' + selectedDate];
     sheetData.push(reportTitle, currentDate, headers);
     let type = 'скло'
-    if(glassList){
+    if (glassList) {
         Object.entries(glassList).forEach(([key, value]) => {
             let result = [type, value['glass_name'], value['glass_count']]
             sheetData.push(result);
         });
     }
     type = 'вставка'
-    if(vstavkaList){
+    if (vstavkaList) {
         Object.entries(vstavkaList).forEach(([key, value]) => {
             let result = [type, value['stick_name'], value['stick_count']]
             sheetData.push(result);
         });
     }
     type = 'напівфабрикат'
-    if(polufabList){
+    if (polufabList) {
         Object.entries(polufabList).forEach(([key, value]) => {
             let result = [type, `${value['tab_3_glass']}_${value['tab_3_insert']}`, value['tab_3_count']]
             sheetData.push(result);
         });
     }
     type = 'поклейка'
-    if(pocleiList){
+    if (pocleiList) {
         Object.entries(pocleiList).forEach(([key, value]) => {
             let result = [type, `${value['tab_4_glass']}_${value['tab_4_insert']}`, value['tab_4_count']]
             sheetData.push(result);
         });
     }
     type = 'готове'
-    if(gotovList){
+    if (gotovList) {
         Object.entries(gotovList).forEach(([key, value]) => {
             let result = [type, `${value['tab_5_glass']}_${value['tab_5_insert']}`, value['tab_5_count']]
             sheetData.push(result);
         });
     }
-    var fileName = selectedDate ? 'Звіт_' + selectedDate + '_availability' +'.xlsx' : 'report.xlsx';
+    var fileName = selectedDate ? 'Звіт_' + selectedDate + '_availability' + '.xlsx' : 'report.xlsx';
     var workbook = XLSX.utils.book_new();
     var worksheet = XLSX.utils.aoa_to_sheet(sheetData);
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Report');
@@ -635,77 +635,15 @@ updateSelectedCount('tab_3_stick_2_selected', 'tab_3_stick_2');
 updateSelectedCount('tab_3_stick_3_selected', 'tab_3_stick_3');
 
 // Слушатель события изменения значения в поле ввода
-document.getElementById('tab_3_stick_1_selected').addEventListener('input', function() {
+document.getElementById('tab_3_stick_1_selected').addEventListener('input', function () {
     updateSelectedCount('tab_3_stick_1_selected', 'tab_3_stick_1');
 });
 
-document.getElementById('tab_3_stick_2_selected').addEventListener('input', function() {
+document.getElementById('tab_3_stick_2_selected').addEventListener('input', function () {
     updateSelectedCount('tab_3_stick_2_selected', 'tab_3_stick_2');
 });
 
-document.getElementById('tab_3_stick_3_selected').addEventListener('input', function() {
+document.getElementById('tab_3_stick_3_selected').addEventListener('input', function () {
     updateSelectedCount('tab_3_stick_3_selected', 'tab_3_stick_3');
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const items = document.querySelectorAll('.id_report_post_item');
-  
-    items.forEach(item => {
-      item.style.position = 'relative'; // Нужно для абсолютного позиционирования overlay
-  
-      item.addEventListener('mouseenter', () => {
-        const overlay = document.createElement('div');
-        overlay.classList.add('overlay-comment');
-        overlay.textContent = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.';
-        overlay.dataset.overlay = 'true'; // чтобы было проще находить
-  
-        item.appendChild(overlay);
-      });
-  
-      item.addEventListener('mouseleave', () => {
-        const overlay = item.querySelector('[data-overlay="true"]');
-        if (overlay) {
-          overlay.remove();
-        }
-      });
-    });
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const elements = document.querySelectorAll('.f.fac.gap8.list_item');
-  
-    elements.forEach(el => {
-      el.style.position = 'relative';
-  
-      el.addEventListener('mouseenter', () => {
-        const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const tooltip = document.createElement('div');
-        tooltip.className = 'tooltip-comment';
-        tooltip.textContent = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.';
-        
-  
-        const isTopHalf = (rect.top + rect.bottom) / 2 < windowHeight / 2;
-        tooltip.classList.add(isTopHalf ? 'bottom' : 'top');
-        tooltip.dataset.tooltip = 'true';
-  
-        document.body.appendChild(tooltip);
-  
-        const tooltipHeight = tooltip.offsetHeight;
-        const tooltipWidth = tooltip.offsetWidth;
-  
-        const top = isTopHalf
-          ? rect.bottom + window.scrollY + 10
-          : rect.top + window.scrollY - tooltipHeight - 10;
-  
-        const left = rect.left + window.scrollX + (rect.width - tooltipWidth) / 2;
-  
-        tooltip.style.top = `${top}px`;
-        tooltip.style.left = `${left}px`;
-      });
-  
-      el.addEventListener('mouseleave', () => {
-        document.querySelectorAll('[data-tooltip="true"]').forEach(tip => tip.remove());
-      });
-    });
-  });

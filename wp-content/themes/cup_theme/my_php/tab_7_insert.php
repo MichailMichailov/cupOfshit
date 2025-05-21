@@ -7,6 +7,7 @@ function process_insert_form() {
     $insert_name = isset($_POST['tab_7_insert']) ? strtolower(sanitize_text_field($_POST['tab_7_insert'])) : '';
     $insert_master = isset($_POST['tab_7_insert_master']) ? strtolower(sanitize_text_field($_POST['tab_7_insert_master'])) : '';
     $insert_action = isset($_POST['insert_action']) ? sanitize_text_field($_POST['insert_action']) : '';
+    $insert_comments = isset($_POST['tab_7_insert_comment']) ? sanitize_text_field($_POST['tab_7_insert_comment']) : '';
 
     // Отладочная информация
     error_log("Insert Name: " . $insert_name);
@@ -21,7 +22,8 @@ function process_insert_form() {
     if ($insert_action === 'Створення виїмки') {
         if ($insert_name && $insert_master && $insert_action) {
             $insert_block = array(
-                'insert_name' => $insert_name
+                'insert_name' => $insert_name,
+                'insert_comments'=>$insert_comments
             );
 
             $existing_insert_list = CFS()->get('insert_list', 10);
@@ -74,7 +76,8 @@ function process_insert_form() {
         'tab_6_master' => $insert_master,
         'tab_6_action' => $insert_action,
         'tab_6_time' => $current_time,
-        'tab_6_date' => $current_date
+        'tab_6_date' => $current_date,
+        'tab_6_comment' => $insert_comments,
     );
 
     $existing_report_list = CFS()->get('tab_6_list', 10);

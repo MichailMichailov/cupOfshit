@@ -83,68 +83,14 @@
     cursor: pointer;
 }
 
-.downloadToExel{
+.downloadToExel {
     display: flex;
 }
-.flex_col{
+
+.flex_col {
     display: flex;
     flex-direction: column;
 }
-
-.overlay-comment {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.8;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    pointer-events: none;
-    z-index: 999;
-	padding: 0px 10px;
-  }
-
-  .tooltip-comment {
-    position: absolute;
-    max-width: 70vw;
-    background: rgba(0, 0, 0, 0.85);
-    color: #fff;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    white-space: normal;
-    z-index: 1000;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    text-align: center;
-  }
-  
-  .tooltip-comment::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    border: solid transparent;
-    height: 0;
-    width: 0;
-  }
-  
-  .tooltip-comment.bottom::after {
-    top: -6px;
-    border-width: 6px;
-    border-bottom-color: rgba(0, 0, 0, 0.85);
-  }
-  
-  .tooltip-comment.top::after {
-    bottom: -6px;
-    border-width: 6px;
-    border-top-color: rgba(0, 0, 0, 0.85);
-  }
 
 @media (max-width: 500px) {
     .calendar-container {
@@ -161,16 +107,16 @@
     }
 
     .calendar-grid {
-        grid-template-columns: repeat(7, 1fr); 
+        grid-template-columns: repeat(7, 1fr);
     }
 
     .date-cell {
-        font-size: 12px; 
+        font-size: 12px;
         height: 30px;
     }
 
     .day-name {
-        font-size: 10px; 
+        font-size: 10px;
     }
 
     #dateRangeInput {
