@@ -130,7 +130,7 @@ function process_glass_form() {
         'tab_6_action' => $glass_action,
         'tab_6_time' => $current_time,
         'tab_6_date' => $current_date,
-        'tab_6_comment' => $glass_comments,
+        'tab_6_comments' => $glass_comments,
     );
     // Отладочный вывод для проверки содержимого $report_block
     $existing_report_list = CFS()->get('tab_6_list', 10);

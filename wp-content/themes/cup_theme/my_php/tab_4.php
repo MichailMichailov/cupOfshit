@@ -12,6 +12,7 @@ function process_tab_4_form()
 		$tab_4_count = intval($_POST['tab_4_count']);
 		$tab_4_master = sanitize_text_field($_POST['tab_4_master']);
 		$tab_4_action = sanitize_text_field($_POST['tab_4_action']);
+		$tab_4_comments = isset($_POST['tab_4_comment']) ? sanitize_text_field($_POST['tab_4_comment']) : '';
 
 		$current_datetime = current_time('mysql');
 		list($current_date, $current_time) = explode(' ', $current_datetime);
@@ -62,7 +63,8 @@ function process_tab_4_form()
 			'insert_hidden' => $tab_4_insert_hidden,
 			'date' => $current_date,
 			'time' => $current_time,
-			'sticks' => $tab_4_sticks
+			'sticks' => $tab_4_sticks,
+			'comment' => $tab_4_comments,
 		);
 
 		if ($product['action'] === 'Готове') {
@@ -70,7 +72,6 @@ function process_tab_4_form()
 			$existing_tab_5_list = CFS()->get('tab_5_list', 10);
 			$found = false;
 			foreach ($existing_tab_5_list as &$tab_5_item) {
-
 				// Приводим все содержимое к нижнему регистру перед сравнением
 				$tab_5_glass = strtolower($tab_5_item['tab_5_glass']);
 				$tab_5_insert = strtolower($tab_5_item['tab_5_insert']);
@@ -106,6 +107,7 @@ function process_tab_4_form()
 
 					if ($tab_5_sticks_names_counts === $product_sticks_names_counts) {
 						$tab_5_item['tab_5_count'] += $product['count'];
+						$tab_5_item['tab_5_comments'] = $product['comment'];
 						$found = true;
 						break;
 					}
@@ -117,10 +119,10 @@ function process_tab_4_form()
 					'tab_5_glass' => $product['glass_hidden'],
 					'tab_5_insert' => $product['insert_hidden'],
 					'tab_5_count' => $product['count'],
-					'tab_5_stick_list' => $product['sticks']
+					'tab_5_stick_list' => $product['sticks'],
+					'tab_5_comments' => $product['comment'],
 				);
 			}
-
 			// Сохраняем обновленный список tab_4_list
 			$field_data_tab_5 = array( 'tab_5_list' => $existing_tab_5_list);
 			// raskoment
@@ -254,8 +256,6 @@ function process_tab_4_form()
 		$field_data_tab_4 = [ 'tab_4_list' => $existing_tab_4_list ];
 		// raskoment
 		CFS()->save($field_data_tab_4, $post_data);
-
-
 		// Добавляем данные в отчет
 		$report_block = array(
 			'tab_6_status' => $product['status'],
@@ -265,7 +265,8 @@ function process_tab_4_form()
 			'tab_6_master' => $product['master'],
 			'tab_6_time' => $product['time'],
 			'tab_6_date' => $product['date'],
-			'tab_6_stick_list' => $product['sticks']
+			'tab_6_stick_list' => $product['sticks'],
+			'tab_6_comments'   => $tab_4_comments,
 		);
 		// Получаем существующий отчет
 		$existing_report_list = CFS()->get('tab_6_list', 10);
@@ -285,11 +286,9 @@ function process_tab_4_form()
 			echo 'Ошибка: ' . $e->getMessage(); // Вывод текста ошибки
 			return 0;
 		}
-		
 	} else {
 		echo 'error'; // Если данные отсутствуют, возвращаем ошибку
 	}
-
 	wp_redirect($_SERVER['HTTP_REFERER']);
 	exit;
 }

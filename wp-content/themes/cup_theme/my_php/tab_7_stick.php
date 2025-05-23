@@ -137,7 +137,7 @@ function process_stick_form() {
         'tab_6_action' => $stick_action,
         'tab_6_time' => $current_time,
         'tab_6_date' => $current_date,
-        'tab_6_comment' => $stick_comments,
+        'tab_6_comments' => $stick_comments,
     );
 
     $existing_report_list = CFS()->get('tab_6_list', 10);

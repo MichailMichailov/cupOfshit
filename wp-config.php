@@ -60,6 +60,8 @@ define( 'SECURE_AUTH_SALT', ' ZjV{tzZ1d<A+6j_:-^3Zpin[YT2*h 7NhP,i4:cVT4~^A~{jTN
 define( 'LOGGED_IN_SALT',   '+bPxu$IEcu  a7mh;7fGR1=0Y@H!0s+CnI=e3[jz#LV+?oBY-p?yztM&lZ#tVaCE' );
 define( 'NONCE_SALT',       'r5Ju:R7DD7@[chv<Dum!wm=Gihceya7SPrW6Xk#^DhR.>u0PnRJF[$=259HkRV2L' );
 
+
+
 /**#@-*/
 
 /**
@@ -82,7 +84,12 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/documentation/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
+
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', false);
+
+ // define( 'WP_DEBUG', false );
 define( 'DISALLOW_FILE_MODS', true );
 /* Add any custom values between this line and the "stop editing" line. */
 

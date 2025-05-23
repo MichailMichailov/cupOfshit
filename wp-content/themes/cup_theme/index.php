@@ -195,6 +195,10 @@ get_header();
         </div>
         <!--Скрытый-->
         <input type="hidden" name="tab_1_action" id="tab_1_action">
+        <div class="f fc gap8 w">
+            <div class="w BIG">Коментар</div>
+            <input type="text" name="tab_1_comment" id="tab_1_comment" class="shadow pad8 w" style="background-image: none;" />
+        </div>
     </form>
     <!--скрипт-->
     <script>
@@ -298,6 +302,9 @@ get_header();
                             <span class="c4">
                                 <?php echo $glass_item['glass_name']; ?>
                             </span>
+                            <div class="tooltip-text">
+                                <?php echo $glass_item['glass_comments']; ?>
+                            </div>
                         </li>
                     <?php
                     }
@@ -348,19 +355,29 @@ get_header();
                     }
 
                     // Создаем массив для хранения только значений 'insert_name'
-                    $names = array();
-                    foreach ($insert_list as $index => $insert_item) {
-                        $names[$index] = $insert_item['insert_name'];
+                    $items = array();
+
+                    // Сохраняем и имя, и комментарий
+                    foreach ($insert_list as $item) {
+                        $items[] = array(
+                            'name' => $item['insert_name'],
+                            'comment' => $item['insert_comments'],
+                        );
                     }
 
-                    // Сортируем массив с помощью пользовательской функции сравнения
-                    usort($names, 'cmp');
+                    // Сортируем по имени
+                    usort($items, function ($a, $b) {
+                        return strcmp($a['name'], $b['name']); // или использовать функцию cmp, если она у тебя уже есть
+                    });
 
                     // Выводим элементы списка в соответствии с отсортированным массивом
-                    foreach ($names as $index => $name) {
+                    foreach ($items as $index => $item) {
                 ?>
-                        <li class="f fac gap8 list_item c9" data-name="<?php echo $name; ?>" data-id="<?php echo $index + 1; ?>">
-                            <?php echo $name; ?>
+                        <li class="f fac gap8 list_item c9" data-name="<?php echo $item['name']; ?>" data-id="<?php echo $index + 1; ?>">
+                            <?php echo $item['name']; ?>
+                            <div class="tooltip-text">
+                                <?php echo $item['comment']; ?>
+                            </div>
                         </li>
                     <?php
                     }
@@ -401,6 +418,9 @@ get_header();
                             <span class="c10">
                                 <?php echo $stick_item['stick_name']; ?>
                             </span>
+                            <div class="tooltip-text">
+                                <?php echo $stick_item['stick_comments']; ?>
+                            </div>
                         </li>
                     <?php
                     }
@@ -514,6 +534,10 @@ get_header();
         </div>
         <!--Скрытый-->
         <input type="hidden" name="tab_2_action" id="tab_2_action">
+        <div class="f fc gap8 w">
+            <div class="w BIG">Коментар</div>
+            <input type="text" name="tab_2_comment" id="tab_2_comment" class="shadow pad8 w" style="background-image: none;" />
+        </div>
     </form>
     <script>
         jQuery(function($) {
@@ -606,6 +630,9 @@ get_header();
                                     echo $tab_2_item['tab_2_insert'];
                                 } ?>
                             </span>
+                            <div class="tooltip-text">
+                                <?php echo $tab_2_item['tab_2_comments']; ?>
+                            </div>
                         </li>
                     <?php
                     }
@@ -848,6 +875,10 @@ get_header();
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="f fc gap8 w">
+            <div class="w BIG">Коментар</div>
+            <input type="text" name="tab_3_comment" id="tab_3_comment" class="shadow pad8 w" style="background-image: none;" />
         </div>
         <!--Действие-->
         <div class="f fc gap8 f_250_10">
@@ -1095,6 +1126,9 @@ get_header();
                             <span class="c9">
                                 <?php echo $tab_3_item['tab_3_insert']; ?>
                             </span>
+                            <div class="tooltip-text">
+                                <?php echo $tab_3_item['tab_3_comments']; ?>
+                            </div>
                         </li>
                     <?php
                     }
@@ -1132,6 +1166,9 @@ get_header();
                             <span class="c10">
                                 <?php echo $stick_item['stick_name']; ?>
                             </span>
+                            <div class="tooltip-text">
+                                <?php echo $stick_item['stick_comments']; ?>
+                            </div>
                         </li>
                     <?php
                     }
@@ -1263,10 +1300,13 @@ get_header();
         <input type="hidden" name="tab_4_stick_hidden" id="tab_4_stick_hidden">
         <input type="hidden" name="action" value="tab_4_form">
         <input type="hidden" name="tab_4_action" id="tab_4_action">
+        <div class="f fc gap8 w">
+            <div class="w BIG">Коментар</div>
+            <input type="text" name="tab_4_comment" id="tab_4_comment" class="shadow pad8 w" style="background-image: none;" />
+        </div>
     </form>
     <!--скрипт-->
     <script>
-      
         jQuery(function($) {
             $('.tab_4_buttons button').click(function(e) {
                 var action = $(this).attr('name'); // Получаем значение атрибута name нажатой кнопки
@@ -1368,6 +1408,9 @@ get_header();
                             </div>
                             <div class="c9">
                                 <?php echo isset($tab_4_item['tab_4_insert']) ? $tab_4_item['tab_4_insert'] : ''; ?>
+                            </div>
+                            <div class="tooltip-text">
+                                <?php echo $tab_4_item['tab_4_comments']; ?>
                             </div>
                             <?php if (isset($tab_4_item['tab_4_stick_list'])) : ?>
                                 <ul class="f fac gap8">
@@ -1522,6 +1565,10 @@ get_header();
         <input type="hidden" name="tab_5_stick_hidden" id="tab_5_stick_hidden">
         <input type="hidden" name="action" value="tab_5_form">
         <input type="hidden" name="tab_5_action" id="tab_5_action">
+        <div class="f fc gap8 w">
+            <div class="w BIG">Коментар</div>
+            <input type="text" name="tab_5_comment" id="tab_5_comment" class="shadow pad8 w" style="background-image: none;" />
+        </div>
     </form>
     <!--скрипт-->
     <script>
@@ -1636,6 +1683,9 @@ get_header();
                             </div>
                             <div class="c9">
                                 <?php echo $tab_5_item['tab_5_insert']; ?>
+                            </div>
+                            <div class="tooltip-text">
+                                <?php echo $tab_5_item['tab_5_comments']; ?>
                             </div>
                             <ul class="f fac gap8">
                                 <?php
@@ -1779,6 +1829,10 @@ get_header();
                                 <?php echo $tab_6_item['tab_6_date']; ?>
                             <?php endif; ?>
                         </div>
+                    </div>
+
+                    <div class="tooltip-text">
+                        <?php echo $tab_6_item['tab_6_comments']; ?>
                     </div>
                 </li>
             <?php
@@ -1953,7 +2007,7 @@ get_header();
 
             <div class="f fc gap8 w">
                 <div class="w BIG">Коментар</div>
-                <input type="text" name="tab_7_glass_comment" id="tab_7_glass_comment" class="shadow pad8 w" style="background-image: none;"/>
+                <input type="text" name="tab_7_glass_comment" id="tab_7_glass_comment" class="shadow pad8 w" style="background-image: none;" />
             </div>
         </form>
         <script>
@@ -2133,7 +2187,7 @@ get_header();
             <input type="hidden" name="insert_action" id="insert_action">
             <div class="f fc gap8 w">
                 <div class="w BIG">Коментар</div>
-                <input type="text" name="tab_7_insert_comment" id="tab_7_insert_comment" class="shadow pad8 w" style="background-image: none;"/>
+                <input type="text" name="tab_7_insert_comment" id="tab_7_insert_comment" class="shadow pad8 w" style="background-image: none;" />
             </div>
         </form>
         <script>
@@ -2320,7 +2374,7 @@ get_header();
             <input type="hidden" name="stick_action" id="stick_action">
             <div class="f fc gap8 w">
                 <div class="w BIG">Коментар</div>
-                <input type="text" name="tab_7_stick_comment" id="tab_7_stick_comment" class="shadow pad8 w" style="background-image: none;"/>
+                <input type="text" name="tab_7_stick_comment" id="tab_7_stick_comment" class="shadow pad8 w" style="background-image: none;" />
             </div>
         </form>
         <script>
@@ -2735,6 +2789,9 @@ get_header();
                                         echo $tab_2_item['tab_2_insert'];
                                     } ?>
                                 </span>
+                                <div class="tooltip-text">
+                                    <?php echo $tab_2_item['tab_2_comments']; ?>
+                                </div>
                             </li>
                         <?php
                         }
@@ -2779,6 +2836,9 @@ get_header();
                                 <span class="c9">
                                     <?php echo $tab_3_item['tab_3_insert']; ?>
                                 </span>
+                                <div class="tooltip-text">
+                                    <?php echo $tab_3_item['tab_3_comments']; ?>
+                                </div>
                             </li>
                         <?php
                         }
@@ -2826,6 +2886,9 @@ get_header();
                                 </div>
                                 <div class="c9">
                                     <?php echo isset($tab_4_item['tab_4_insert']) ? $tab_4_item['tab_4_insert'] : ''; ?>
+                                </div>
+                                <div class="tooltip-text">
+                                    <?php echo $tab_4_item['tab_4_comments']; ?>
                                 </div>
                                 <?php if (isset($tab_4_item['tab_4_stick_list'])) : ?>
                                     <ul class="f fac gap8">
@@ -2891,6 +2954,9 @@ get_header();
                                 </div>
                                 <div class="c9">
                                     <?php echo $tab_5_item['tab_5_insert']; ?>
+                                </div>
+                                <div class="tooltip-text">
+                                    <?php echo $tab_5_item['tab_5_comments']; ?>
                                 </div>
                                 <ul class="f fac gap8">
                                     <?php

@@ -5,6 +5,7 @@
 
 .calendar-container {
     position: absolute;
+    z-index: 1000;
     left: -5%;
     width: 320px;
     margin: 20px auto;

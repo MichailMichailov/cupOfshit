@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
         item.addEventListener('mouseenter', () => {
             const overlay = document.createElement('div');
             overlay.classList.add('overlay-comment');
-            overlay.textContent = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.';
+            const text = item.querySelector('.tooltip-text')
+            if (!text || text.innerHTML.trim().length==0) return;
+            overlay.textContent = text.innerHTML;
             overlay.dataset.overlay = 'true'; // чтобы было проще находить
 
             item.appendChild(overlay);

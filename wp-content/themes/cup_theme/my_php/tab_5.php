@@ -10,6 +10,7 @@ function process_tab_5_form()
         $tab_5_count = intval($_POST['tab_5_count']);
         $tab_5_master = sanitize_text_field($_POST['tab_5_master']);
         $tab_5_action = sanitize_text_field($_POST['tab_5_action']);
+        $tab_5_comments = isset($_POST['tab_5_comment']) ? sanitize_text_field($_POST['tab_5_comment']) : '';
 
         $current_datetime = current_time('mysql');
         list($current_date, $current_time) = explode(' ', $current_datetime);
@@ -177,7 +178,8 @@ function process_tab_5_form()
             'tab_6_master' => $product['master'],
             'tab_6_time' => $product['time'],
             'tab_6_date' => $product['date'],
-            'tab_6_stick_list' => $product['sticks']
+            'tab_6_stick_list' => $product['sticks'],
+            'tab_6_comments'   => $tab_5_comments,
         );
 
         $existing_report_list = CFS()->get('tab_6_list', 10);
